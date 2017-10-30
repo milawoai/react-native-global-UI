@@ -1,0 +1,3 @@
+rootProject.name = 'rnUIlib'
+
+include ':app'
