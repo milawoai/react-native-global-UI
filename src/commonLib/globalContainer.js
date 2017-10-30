@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 let isEstablished = false;
 
 (function initAppRegistryInjection() {
-  console.warn('initAppRegistryInjection')
   if (isEstablished) return
   isEstablished = true
   const originRegister = AppRegistry.registerComponent;

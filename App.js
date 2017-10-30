@@ -11,6 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
+import StackNav from './src/pages/stackNav'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -20,20 +21,10 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
-  render() {
+  render () {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
+      <StackNav ref={nav => { this.navigator = nav }}/>
+    )
   }
 }
 
