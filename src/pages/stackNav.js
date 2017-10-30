@@ -11,6 +11,8 @@ import React from 'react'
 import { StackNavigator } from 'react-navigation'
 import { StatusBar, Platform } from 'react-native'
 
+import { px2dp, px2sp } from '../utils/screenUtils'
+
 import Main from './main'
 
 import navigationUtils from '../utils/navigationUtils'
