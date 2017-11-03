@@ -8,16 +8,26 @@
  */
 import React from 'react'
 
-import { StackNavigator } from 'react-navigation'
-import { StatusBar, Platform } from 'react-native'
+import {
+  StackNavigator
+} from 'react-navigation'
+import {
+  StatusBar,
+  Platform
+} from 'react-native'
 
-import { px2dp, px2sp } from '../utils/screenUtils'
+import {
+  px2dp,
+  px2sp
+} from '../utils/screenUtils'
 
 import Main from './main'
 
 import navigationUtils from '../utils/navigationUtils'
 
-const navigationOptions = ({navigation}) => {
+const navigationOptions = ({
+  navigation
+}) => {
   return {
     headerBackTitleStyle: {
       backgroundColor: '#fff',
@@ -60,9 +70,9 @@ const AppRoutes = {
   }
 }
 
-const Index = StackNavigator(AppRoutes, stackNavigationConfigs)
+const StackNav = StackNavigator(AppRoutes, stackNavigationConfigs)
 
-const defaultGetStateForAction = Index.router.getStateForAction
+const defaultGetStateForAction = StackNav.router.getStateForAction
 
 /**
  * 去除Route中一组特定页面
@@ -83,7 +93,7 @@ const getStateWithFilterSomePage = (state, filterPageArray = []) => {
 
 /**
  */
-Index.router.getStateForAction = withUpdateStatusBar((action, state) => {
+StackNav.router.getStateForAction = withUpdateStatusBar((action, state) => {
   if (state && action.type === 'loginSuccess') {
     const loginPages = ['VerifyPhone', 'Login', 'VerifyIdentifyingCode']
     return getStateWithFilterSomePage(state, loginPages)
@@ -106,7 +116,7 @@ Index.router.getStateForAction = withUpdateStatusBar((action, state) => {
   return defaultGetStateForAction(action, state)
 })
 
-function withUpdateStatusBar (func) {
+function withUpdateStatusBar(func) {
   return (...args) => {
     const newState = func(...args)
     const currentRouteName = navigationUtils.getCurrentRouteName(newState)
@@ -125,4 +135,4 @@ function withUpdateStatusBar (func) {
   }
 }
 
-export default Index
+export default StackNav

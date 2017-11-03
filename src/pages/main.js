@@ -8,7 +8,7 @@ import { StyleSheet, Image, View } from 'react-native'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
 import { px2dp } from '../utils/screenUtils'
 
-import ModalPage from './modal/modalPage'
+import ModalPage from './tankuang/modalPage'
 
 const tabNavigatorConf = {
   initialRouteName: 'Home',
@@ -36,8 +36,6 @@ const MainTab = TabNavigator({
     navigationOptions: ({navigation}) => ({
       tabBarLabel: '弹框UI',
       title: '弹框UI',
-      header: null,
-      headerLeft: () => {},
     })
   },
 }, tabNavigatorConf)
