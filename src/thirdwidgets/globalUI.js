@@ -9,7 +9,7 @@ import globalCustom from './widgets/rootsiblings/globalCustom'
 import Loading from './widgets/loading/loading'
 
 
-function showLoading(options) {
+const showLoading = (options) => {
   hideLoading()
   show(Loading, options)
 }

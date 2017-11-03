@@ -19,3 +19,8 @@ export const alignCenterStyle = {
   justifyContent: 'center',
   alignItems: 'center',
 }
+
+//是否折行
+export const lineWarpStyle = {
+  flexWrap: 'wrap'
+}

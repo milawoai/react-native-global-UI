@@ -6,7 +6,8 @@ import PropTypes from 'prop-types'
 import {
   View,
   Text,
-  ActivityIndicator
+  ActivityIndicator,
+  Platform
 } from 'react-native';
 
 const ViewPropTypes = require('ViewPropTypes');
@@ -30,6 +31,11 @@ const defaultStyles = {
     padding: px2dp(30),
     alignSelf:'center'
   },
+  noMaskPosition: {
+    position: 'absolute',
+    top: `50%`,
+    left: `50%`
+  },
   loadingTextStyle: {
     fontSize:18,
     textAlign:'center',
@@ -44,6 +50,11 @@ const defaultStyles = {
   }
 }
 
+const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+
+// 完成了full， block， 差none
+
 class Loading extends Component {
 
   static propTypes = {
@@ -55,12 +66,14 @@ class Loading extends Component {
       'block',//不阻挡nav
       'full',
     ]),
+    //距离顶部高度
+    blockHeight: PropTypes.number,
     // 提示文案
     loadingText: PropTypes.string,
     // 提示文案Style
-    loadingTextStyle: PropTypes.style,
+    loadingTextStyle: Text.propTypes.style,
     // 提示指示器Style
-    loadingStyle: PropTypes.style,
+    loadingStyle: ViewPropTypes.style,
     // 提示指示器Style
     loadingSize: PropTypes.oneOfType([
       PropTypes.oneOf([ 'small', 'large' ]),
@@ -74,7 +87,6 @@ class Loading extends Component {
     contentStyle: ViewPropTypes.style,
     // mask背景Style
     maskStyle: ViewPropTypes.style,
-
   };
 
   static defaultProps = {
@@ -82,7 +94,8 @@ class Loading extends Component {
     showIndicator: true,
     maskType: 'full',
     loadingSize: 'large',
-    loadingColor: 'white'
+    loadingColor: 'white',
+    blockHeight: APPBAR_HEIGHT+STATUSBAR_HEIGHT
   }
 
   constructor(props) {
@@ -92,13 +105,8 @@ class Loading extends Component {
     },props);
   }
 
-  componentWillUnmount() {
-    let self = this;
-    self.stopTimer();
-  }
 
   render() {
-
     const {
       showIndicator,
       loadingText = '加载中...',
@@ -108,26 +116,46 @@ class Loading extends Component {
       maskStyle,
       loadingElem,
       loadingColor,
-      loadingSize
+      loadingSize,
+      maskType,
+      blockHeight
     } = this.props
+
+
+    let contentStyles = [defaultStyles.contentStyle]
+    if (maskType === 'block') {
+      contentStyles.push({position: 'relative', top: -1 * Number(blockHeight)})
+    } else if (maskType === 'none'){
+      contentStyles.push(defaultStyles.noMaskPosition)
+    }
+    contentStyles.push(contentStyle)
 
     if (!showIndicator) return null
 
-    let self = this;
-
     let HUD = (
-      <View style={[defaultStyles.contentStyle, contentStyle]}>
+      <View style={contentStyles}>
         <ActivityIndicator style={defaultStyles.loadingStyle} size={loadingSize} color={loadingColor}/>
         <Text style={[defaultStyles.loadingTextStyle, loadingTextStyle]}>{loadingText}</Text>
       </View>
     );
 
-    let HUDWithMask = self.state.maskScreen?(
-      <View style={[bgStyle, alignCenterStyle]}>
-        <View style={[bgStyle, {backgroundColor:'white',opacity:0.1}]} />
-        {HUD}
-      </View>
-    ):HUD;
+    let HUDWithMask = HUD
+
+    if (maskType === 'full') {
+      HUDWithMask = (
+        <View style={[bgStyle, alignCenterStyle]}>
+          <View style={[bgStyle, {backgroundColor:'black',opacity:0.1} ,maskStyle]} />
+          {HUD}
+        </View>
+      )
+    } else if (maskType === 'block'){
+      HUDWithMask = (
+        <View style={[bgStyle, {marginTop: blockHeight}, alignCenterStyle]}>
+          <View style={[bgStyle, {backgroundColor:'black',opacity:0.1}, maskStyle]} />
+          {HUD}
+        </View>
+      )
+    }
 
     return  HUDWithMask;
   }
