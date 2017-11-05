@@ -7,7 +7,7 @@ import {View, StyleSheet, TouchableOpacity, Animated, Platform} from 'react-nati
 import {px2dp} from "../../../utils/screenUtils"
 import links from '../../../res/links'
 
-export default class Xmodal extends Component {
+export default class WrapModal extends Component {
 
   static propTypes = {
     ...View.propTypes,

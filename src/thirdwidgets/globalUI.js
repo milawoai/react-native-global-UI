@@ -3,10 +3,12 @@
  */
 import React, {Component} from 'react';
 
-import globalModal from './widgets/modal/globalModal'
+import GlobalModal from './widgets/modal/globalmodal'
 import globalPopUp from './widgets/popup/globalPopUp'
 import globalCustom from './widgets/rootsiblings/globalCustom'
+
 import Loading from './widgets/loading/loading'
+import HUD from './widgets/hud/hud'
 
 
 const showLoading = (options) => {
@@ -18,14 +20,23 @@ function hideLoading() {
   globalCustom.hideCustom()
 }
 
+const showHUD = (options) => {
+  hideLoading()
+  show(HUD, options)
+}
+
+function hideHUD() {
+  globalCustom.hideCustom()
+}
+
 const show = (custom, params) => {
   globalCustom.hideCustom()
   globalCustom.showCustom(custom, params)
 }
 
 const showGlobalModal = (ModalName, params) => {
-  globalModal.hideModal()
-  globalModal.showModal(ModalName, params)
+  GlobalModal.hideModal()
+  GlobalModal.showModal(ModalName, params)
 }
 
 const showGlobalPopUp = (PopUpName, params, wrapParams) => {
@@ -36,6 +47,10 @@ const showGlobalPopUp = (PopUpName, params, wrapParams) => {
 export default {
   showLoading,
   hideLoading,
+
+  showHUD,
+  hideHUD,
+
   showGlobalModal,
   showGlobalPopUp,
 

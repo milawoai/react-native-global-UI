@@ -69,7 +69,7 @@ export default class ModalPage extends Component {
       LoadingInfo
     ]
   }
-  
+
   render() {
     let cells =  this.modalApis.map((elem, index) => {
       return (

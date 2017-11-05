@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native'
-import Xmodal from '../wrapmodal/warpModal'
+import Xmodal from '../wrapmodal/wrapModal'
 import {px2dp} from "../../../utils/screenUtils"
 import links from '../../../res/links'
 

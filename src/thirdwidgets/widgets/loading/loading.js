@@ -18,7 +18,7 @@ import {px2dp} from '../../utils/screenUtils'
 
 
 let Dimensions = require('Dimensions');
-let ScreenWidth = Dimensions.get('window').width;
+const {width, height} = Dimensions.get('window')
 
 const defaultStyles = {
   contentStyle: {
@@ -98,17 +98,31 @@ class Loading extends Component {
     blockHeight: APPBAR_HEIGHT+STATUSBAR_HEIGHT
   }
 
+  state = this.initState(this.props)
+
   constructor(props) {
     super(props);
-    this.state = Object.assign({},{
-      maskScreen: true
-    },props);
   }
 
+  initState = (props) => {
+    let state = {
+      showIndicator: props.showIndicator,
+      contentX: 0,
+      contentY: 0
+    }
+    return state
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState(this.initState(nextProps))
+  }
 
   render() {
     const {
-      showIndicator,
+      showIndicator
+    } = this.state
+
+    const {
       loadingText = '加载中...',
       loadingStyle,
       loadingTextStyle,
@@ -126,14 +140,17 @@ class Loading extends Component {
     if (maskType === 'block') {
       contentStyles.push({position: 'relative', top: -1 * Number(blockHeight)})
     } else if (maskType === 'none'){
-      contentStyles.push(defaultStyles.noMaskPosition)
+      contentStyles.push(defaultStyles.noMaskPosition, {
+        left: (width - this.state.contentX) / 2,
+        top: (height - this.state.contentY) / 2
+      })
     }
     contentStyles.push(contentStyle)
 
     if (!showIndicator) return null
 
     let HUD = (
-      <View style={contentStyles}>
+      <View style={contentStyles} onLayout={({nativeEvent:e})=>this.layout(e)}>
         <ActivityIndicator style={defaultStyles.loadingStyle} size={loadingSize} color={loadingColor}/>
         <Text style={[defaultStyles.loadingTextStyle, loadingTextStyle]}>{loadingText}</Text>
       </View>
@@ -160,84 +177,19 @@ class Loading extends Component {
     return  HUDWithMask;
   }
 
-  show(states){
-    let self = this;
-    self.setState({
-      showIndicator: true,
-      maskScreen:true,
-      ...states
-    });
-    if(self.state.dismissSelf) {
-      self.HUDTimer = setTimeout(
-        () => {
-          self.hidden();
-        },
-        2000
-      );
+
+  layout = (e) => {
+    const threshold = 10
+    if (e && e.layout && (
+      Math.abs(e.layout.x - this.state.contentX)  > threshold ||
+      Math.abs(e.layout.y - this.state.contentY > threshold) )) {
+      this.setState({
+        contentX: e.layout.x,
+        contentY: e.layout.y
+      })
     }
   }
 
-  showLoading(hintText = null){
-    let self = this;
-    self.setState({
-      showIndicator: true,
-      loadingText:hintText?hintText:'加载中...',
-      hintFontSize: 18,
-      hintType:CustomHUD.HUDType.HUDLoading, //0,Loading; 1, Success; 2, failure
-      maskScreen:true, //遮挡屏幕，防止点击
-      dismissSelf:false
-    });
-  }
-
-
-  showSuccess(hintText = null){
-    let self = this;
-    self.setState({
-      showIndicator: true,
-      loadingText:hintText?hintText:'请求成功',
-      hintFontSize: 18,
-      hintType:CustomHUD.HUDType.HUDSuccess, //0,Loading; 1, Success; 2, failure
-      maskScreen:true, //遮挡屏幕，防止点击
-      dismissSelf:false
-    });
-    self.HUDTimer = setTimeout(
-      () => {
-        self.hidden();
-      },
-      2000
-    );
-  }
-
-  showError(hintText = null){
-    let self = this;
-    self.setState({
-      showIndicator: true,
-      loadingText:hintText?hintText:'请求失败',
-      hintFontSize: 18,
-      hintType:CustomHUD.HUDType.HUDSuccess, //0,Loading; 1, Success; 2, failure
-      maskScreen:true, //遮挡屏幕，防止点击
-      dismissSelf:false
-    });
-    self.HUDTimer = setTimeout(() => {self.hidden();},2000);
-  }
-
-  hidden(){
-    let self = this;
-    self.setState({
-      showIndicator: false,
-      loadingText:'加载中...',
-      hintFontSize: 18,
-      hintType:CustomHUD.HUDType.HUDLoading, //0,Loading; 1, Success; 2, failure
-      maskScreen:false, //遮挡屏幕，防止点击
-      dismissSelf:false
-    });
-    self.stopTimer();
-  }
-
-  stopTimer() {
-    let self = this;
-    self.HUDTimer && clearTimeout(self.HUDTimer);
-  }
 }
 
 

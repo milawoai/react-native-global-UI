@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import RootSiblings from '../rootsiblings/SiblingsManager'
 import AdModal from './impl/adModal'
-import Xmodal from './wrapmodal/warpModal'
+import WrapModal from './wrapmodal/wrapModal'
 
 const Modals = {
   'AdModal': AdModal
@@ -29,9 +29,9 @@ const showModal = (Modal, params, warpParams) => {
   let fixWarpParams = Object.assign({},{closeModal: hideModal}, warpParams)
   let fixParams = Object.assign({},{closeModal: hideModal}, params)
   const renderContent = Modal?(
-    <Xmodal {...fixWarpParams}>
+    <WrapModal {...fixWarpParams}>
       <Modal {...fixParams } />
-    </Xmodal>
+    </WrapModal>
   ):null
   rootSiblingInstanceModal = new RootSiblings(renderContent)
   return rootSiblingInstanceModal

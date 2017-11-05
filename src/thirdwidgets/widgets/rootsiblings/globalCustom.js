@@ -21,7 +21,7 @@ const showCustom = (Custom, params = {}) => {
   hideCustom()
   if (!Custom) return
   let fixParams = Object.assign(params, {
-    onRequestClose: hideCustom
+    hide: hideCustom
   })
   const renderContent = Custom ? <Custom {...fixParams } /> : null
   rootSiblingInstanceCustom = new RootSiblings(renderContent)
