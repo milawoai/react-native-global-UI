@@ -98,20 +98,20 @@ class Loading extends Component {
     blockHeight: APPBAR_HEIGHT+STATUSBAR_HEIGHT
   }
 
+  initState = (props) => {
+    return {
+      showIndicator: props.showIndicator,
+      contentX: 0,
+      contentY: 0
+    }
+  }
+
   state = this.initState(this.props)
 
   constructor(props) {
     super(props);
   }
 
-  initState = (props) => {
-    let state = {
-      showIndicator: props.showIndicator,
-      contentX: 0,
-      contentY: 0
-    }
-    return state
-  }
 
   componentWillReceiveProps (nextProps) {
     this.setState(this.initState(nextProps))

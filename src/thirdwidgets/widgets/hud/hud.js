@@ -31,7 +31,7 @@ const defaultStyles = {
     opacity: 0.7,
     alignItems: 'center',
     minWidth: px2dp(180),
-    minHeight:  px2dp(180),
+    minHeight: px2dp(180),
     padding: px2dp(30),
     alignSelf:'center'
   },
@@ -40,12 +40,12 @@ const defaultStyles = {
     top: `50%`,
     left: `50%`
   },
-  loadingTextStyle: {
+  hudTextStyle: {
     fontSize: 18,
     textAlign: 'center',
     color: 'white',
     margin: 15,
-    marginTop:px2dp(10)
+    marginTop: px2dp(30)
   },
   hintImage: {
     marginTop: 15,
@@ -86,19 +86,30 @@ export default class HUD extends Component {
     // mask背景Style
     maskStyle: ViewPropTypes.style,
     // 指定提示地址
-    customImageSource: PropTypes.Object,
+    customImageSource: PropTypes.object,
     // 提示Image style
     hintImageStyle: ColorPropType,
+
+    //消失时间
+    disappearTime:  PropTypes.number,
 
     hide: PropTypes.func
   };
 
   static defaultProps = {
-    hudText:'加载中...',
     showIndicator: true,
-    maskType: 'full',
+    maskType: 'none',
     hintType: 'success',
-    blockHeight: APPBAR_HEIGHT+STATUSBAR_HEIGHT
+    blockHeight: APPBAR_HEIGHT+STATUSBAR_HEIGHT,
+    disappearTime: 2000
+  }
+
+  initState = (props) => {
+    return  {
+      showIndicator: props.showIndicator,
+      contentX: 0,
+      contentY: 0
+    }
   }
 
   state = this.initState(this.props)
@@ -121,18 +132,7 @@ export default class HUD extends Component {
   componentWillReceiveProps (nextProps) {
     this.setState(this.initState(nextProps))
   }
-
-
-  initState = (props) => {
-    let state = {
-      showIndicator: props.showIndicator,
-      contentX: 0,
-      contentY: 0
-    }
-    return state
-  }
-
-
+  
   render() {
     const {showIndicator} = this.state
     if (!showIndicator) return null
@@ -149,14 +149,14 @@ export default class HUD extends Component {
       resultUI = (
         <View style={[bgStyle, alignCenterStyle]}>
           <View style={[bgStyle, {backgroundColor:'black',opacity:0.1} ,maskStyle]} />
-          {HUD}
+          {resultUI}
         </View>
       )
     } else if (maskType === 'block'){
       resultUI = (
         <View style={[bgStyle, {marginTop: blockHeight}, alignCenterStyle]}>
           <View style={[bgStyle, {backgroundColor:'black',opacity:0.1}, maskStyle]} />
-          {HUD}
+          {resultUI}
         </View>
       )
     }
@@ -166,12 +166,13 @@ export default class HUD extends Component {
   
   
   renderContent = () => {
-    const {
-      hudText = '加载中...',
+    let {
+      hudText,
       hudTextStyle,
       contentStyle,
       maskType,
-      blockHeight
+      blockHeight,
+      hintType
     } = this.props
 
     let contentStyles = [defaultStyles.contentStyle]
@@ -185,7 +186,19 @@ export default class HUD extends Component {
     }
     contentStyles.push(contentStyle)
 
-    if (!showIndicator) return null
+    if (!hudText) {
+      switch (hintType) {
+        case 'success':
+          hudText = '加载成功'
+          break
+        case 'fail':
+          hudText = '加载失败'
+          break
+        case 'custom':
+          console.warn(`hintType 为 custom 时，请设置提示文字hudText`)
+          break
+      }
+    }
 
     return (
       <View style={contentStyles} onLayout={({nativeEvent:e})=>this.layout(e)}>
@@ -247,7 +260,7 @@ export default class HUD extends Component {
   startTimer = () => {
     this.HUDTimer = setTimeout(
       this.hidden,
-      2000
+      this.props.disappearTime
     );
   }
 

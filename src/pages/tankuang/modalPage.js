@@ -65,8 +65,34 @@ export default class ModalPage extends Component {
       ]
     }
 
+    const LoadingHUD = {
+      title: 'HUD',
+      buttonInfos: [
+        {// GlobalUI.showHUD({hintType: 'success'})
+          text: 'success',
+          onPress: GlobalUI.showHUD,
+          params: {hintType: 'success'}
+        },
+        {// GlobalUI.showLoading({maskType: 'block'})
+          text: 'fail',
+          onPress: GlobalUI.showHUD,
+          params: {hintType: 'fail'}
+        },
+        {// GlobalUI.showLoading({maskType: 'none'})
+          text: '设定时间',
+          onPress: GlobalUI.showLoading,
+          params: {maskType: 'none'}
+        },
+        {// GlobalUI.hideLoading()
+          text: '隐藏Loading',
+          onPress: GlobalUI.hideHUD
+        }
+      ]
+    }
+
     this.modalApis = [
-      LoadingInfo
+      LoadingInfo,
+      LoadingHUD
     ]
   }
 
