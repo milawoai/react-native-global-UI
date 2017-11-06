@@ -2,7 +2,7 @@
  * Created by ygj on 2017/10/30.
  */
 import React, { Component } from 'react'
-import { StyleSheet, Image, View, TouchableOpacity, Text} from 'react-native'
+import { StyleSheet, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native'
 import { px2dp , px2sp} from '../../utils/screenUtils'
 import { lineWarpStyle} from '../../thirdwidgets/res/commonStyle'
 import GlobalUI from '../../thirdwidgets/globalUI'
@@ -78,10 +78,10 @@ export default class ModalPage extends Component {
           onPress: GlobalUI.showHUD,
           params: {hintType: 'fail'}
         },
-        {// GlobalUI.showLoading({maskType: 'none'})
+        {// GlobalUI.showLoading({maskType: 'none', disappearTime: 5000})
           text: '设定时间',
-          onPress: GlobalUI.showLoading,
-          params: {maskType: 'none'}
+          onPress: GlobalUI.showHUD,
+          params: {hintType: 'success', disappearTime: 5000}
         },
         {// GlobalUI.hideLoading()
           text: '隐藏Loading',
@@ -104,9 +104,9 @@ export default class ModalPage extends Component {
       )
     })
     return (
-      <View>
+      <ScrollView>
         {cells}
-      </View>
+      </ScrollView>
     )
   }
 }

@@ -16,10 +16,11 @@ import {
 const ViewPropTypes = require('ViewPropTypes');
 const ColorPropType = require('ColorPropType');
 
-import {icon_success_HUD, icon_error_HUD} from '../../res/links'
-import {bgStyle, alignCenterStyle} from '../../res/commonStyle'
-import {px2dp} from '../../utils/screenUtils'
+import {icon_success_HUD, icon_error_HUD} from '../../../res/links'
+import {bgStyle, alignCenterStyle} from '../../../res/commonStyle'
+import {px2dp} from '../../../utils/screenUtils'
 
+import {MaskWarp} from '../MaskNest'
 
 let Dimensions = require('Dimensions');
 const {width, height} = Dimensions.get('window')
@@ -54,69 +55,42 @@ const defaultStyles = {
   }
 }
 
-const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
-
-// 完成了full， block， 差none
-
-export default class HUD extends Component {
+class HUD extends Component {
 
   static propTypes = {
     // 是否展示
     showIndicator: PropTypes.bool,
-    //使用遮罩
-    maskType: PropTypes.oneOf([
-      'none',
-      'block',//不阻挡nav
-      'full',
-    ]),
     hintType:  PropTypes.oneOf([
       'success',
       'fail',
       'custom'
     ]),
-    //距离顶部高度
-    blockHeight: PropTypes.number,
     // 提示文案
     hudText: PropTypes.string,
     // 提示文案Style
     hudTextStyle: Text.propTypes.style,
     // 提示背景Style
     contentStyle: ViewPropTypes.style,
-    // mask背景Style
-    maskStyle: ViewPropTypes.style,
     // 指定提示地址
     customImageSource: PropTypes.object,
     // 提示Image style
     hintImageStyle: ColorPropType,
 
     //消失时间
-    disappearTime:  PropTypes.number,
+    disappearTime: PropTypes.number,
 
     hide: PropTypes.func
   };
 
   static defaultProps = {
     showIndicator: true,
-    maskType: 'none',
     hintType: 'success',
-    blockHeight: APPBAR_HEIGHT+STATUSBAR_HEIGHT,
     disappearTime: 2000
   }
 
-  initState = (props) => {
-    return  {
-      showIndicator: props.showIndicator,
-      contentX: 0,
-      contentY: 0
-    }
-  }
-
-  state = this.initState(this.props)
 
   constructor(props) {
     super(props);
-    this.initState(props)
   }
 
   componentWillMount() {
@@ -129,43 +103,7 @@ export default class HUD extends Component {
     this.stopTimer();
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.setState(this.initState(nextProps))
-  }
-  
   render() {
-    const {showIndicator} = this.state
-    if (!showIndicator) return null
-
-    const {
-      maskStyle,
-      maskType,
-      blockHeight
-    } = this.props
-
-    let resultUI = this.renderContent()
-
-    if (maskType === 'full') {
-      resultUI = (
-        <View style={[bgStyle, alignCenterStyle]}>
-          <View style={[bgStyle, {backgroundColor:'black',opacity:0.1} ,maskStyle]} />
-          {resultUI}
-        </View>
-      )
-    } else if (maskType === 'block'){
-      resultUI = (
-        <View style={[bgStyle, {marginTop: blockHeight}, alignCenterStyle]}>
-          <View style={[bgStyle, {backgroundColor:'black',opacity:0.1}, maskStyle]} />
-          {resultUI}
-        </View>
-      )
-    }
-
-    return resultUI;
-  }
-  
-  
-  renderContent = () => {
     let {
       hudText,
       hudTextStyle,
@@ -201,7 +139,7 @@ export default class HUD extends Component {
     }
 
     return (
-      <View style={contentStyles} onLayout={({nativeEvent:e})=>this.layout(e)}>
+      <View style={contentStyles}>
         {
           this.renderHUD()
         }
@@ -238,18 +176,6 @@ export default class HUD extends Component {
     )
   }
 
-  layout = (e) => {
-    const threshold = 10
-    if (e && e.layout && (
-      Math.abs(e.layout.x - this.state.contentX)  > threshold ||
-      Math.abs(e.layout.y - this.state.contentY > threshold) )) {
-      this.setState({
-        contentX: e.layout.x,
-        contentY: e.layout.y
-      })
-    }
-  }
-
   show = () => {
     this.setState({
       showIndicator: true
@@ -278,3 +204,5 @@ export default class HUD extends Component {
     self.HUDTimer && clearTimeout(self.HUDTimer);
   }
 }
+
+export default MaskWarp(HUD)

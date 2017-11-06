@@ -7,8 +7,8 @@ import GlobalModal from './widgets/modal/globalmodal'
 import globalPopUp from './widgets/popup/globalPopUp'
 import globalCustom from './widgets/rootsiblings/globalCustom'
 
-import Loading from './widgets/loading/loading'
-import HUD from './widgets/hud/hud'
+import Loading from './widgets/MaskNest/loading/loading'
+import HUD from './widgets/MaskNest/hud/hud'
 
 
 const showLoading = (options) => {
