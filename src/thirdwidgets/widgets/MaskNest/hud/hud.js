@@ -113,17 +113,6 @@ class HUD extends Component {
       hintType
     } = this.props
 
-    let contentStyles = [defaultStyles.contentStyle]
-    if (maskType === 'block') {
-      contentStyles.push({position: 'relative', top: -1 * Number(blockHeight)})
-    } else if (maskType === 'none'){
-      contentStyles.push(defaultStyles.noMaskPosition, {
-        left: (width - this.state.contentX) / 2,
-        top: (height - this.state.contentY) / 2
-      })
-    }
-    contentStyles.push(contentStyle)
-
     if (!hudText) {
       switch (hintType) {
         case 'success':
@@ -139,7 +128,7 @@ class HUD extends Component {
     }
 
     return (
-      <View style={contentStyles}>
+      <View style={[defaultStyles.contentStyle, contentStyle]}>
         {
           this.renderHUD()
         }

@@ -71,7 +71,10 @@ export default class ModalPage extends Component {
         {// GlobalUI.showHUD({hintType: 'success'})
           text: 'success',
           onPress: GlobalUI.showHUD,
-          params: {hintType: 'success'}
+          params: {
+            hintType: 'success',
+            maskType: 'none'
+          }
         },
         {// GlobalUI.showLoading({maskType: 'block'})
           text: 'fail',

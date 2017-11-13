@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Image, View } from 'react-native'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
 import { px2dp } from '../utils/screenUtils'
+import Icon from 'react-native-vector-icons/EvilIcons'
 
 import ModalPage from './tankuang/modalPage'
 
@@ -26,7 +27,7 @@ const tabNavigatorConf = {
     inactiveBackgroundColor: '#ffffff',
     style: {
       backgroundColor: '#fff',
-    },
+    }
   },
 }
 
@@ -36,14 +37,17 @@ const MainTab = TabNavigator({
     navigationOptions: ({navigation}) => ({
       tabBarLabel: '弹框UI',
       title: '弹框UI',
+      tabBarIcon: ({tintColor}) => (
+        <Icon name="refresh" size={25} color={tintColor} />
+      ),
     })
   },
 }, tabNavigatorConf)
 
 const styles = StyleSheet.create({
   icon: {
-    width: 25,
-    height: 25
+    width: 35,
+    height: 35
   }
 })
 
