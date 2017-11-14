@@ -46,21 +46,21 @@ export default class ModalPage extends Component {
       buttonInfos: [
         {// GlobalUI.showLoading()
           text: '覆盖屏幕的loading',
-          onPress: GlobalUI.showLoading
+          onPress: GlobalUI.Loading.show
         },
         {// GlobalUI.showLoading({maskType: 'block'})
           text: '露出Nav的loading',
-          onPress: GlobalUI.showLoading,
+          onPress: GlobalUI.Loading.show,
           params: {maskType: 'block'}
         },
         {// GlobalUI.showLoading({maskType: 'none'})
           text: '没有Mask的loading',
-          onPress: GlobalUI.showLoading,
+          onPress: GlobalUI.Loading.show,
           params: {maskType: 'none'}
         },
         {// GlobalUI.hideLoading()
           text: '隐藏Loading',
-          onPress: GlobalUI.hideLoading
+          onPress: GlobalUI.Loading.hide
         }
       ]
     }
@@ -70,7 +70,7 @@ export default class ModalPage extends Component {
       buttonInfos: [
         {// GlobalUI.showHUD({hintType: 'success'})
           text: 'success',
-          onPress: GlobalUI.showHUD,
+          onPress: GlobalUI.HUD.show,
           params: {
             hintType: 'success',
             maskType: 'none'
@@ -78,17 +78,16 @@ export default class ModalPage extends Component {
         },
         {// GlobalUI.showLoading({maskType: 'block'})
           text: 'fail',
-          onPress: GlobalUI.showHUD,
-          params: {hintType: 'fail'}
+          onPress: GlobalUI.HUD.showFail
         },
         {// GlobalUI.showLoading({maskType: 'none', disappearTime: 5000})
           text: '设定时间',
-          onPress: GlobalUI.showHUD,
-          params: {hintType: 'success', disappearTime: 5000}
+          onPress: GlobalUI.HUD.showSuccess,
+          params: {disappearTime: 5000}
         },
         {// GlobalUI.hideLoading()
           text: '隐藏Loading',
-          onPress: GlobalUI.hideHUD
+          onPress: GlobalUI.hide
         }
       ]
     }
@@ -112,10 +111,37 @@ export default class ModalPage extends Component {
       ]
     }
 
+    const Alerts = {
+      title: 'Alert',
+      buttonInfos: [
+        {// GlobalUI.showHUD({hintType: 'success'})
+          text: '提示弹框',
+          onPress: () => {
+            GlobalUI.Alert.alert(
+              '退款确认',
+              '退款将在5-7个工作日内退到您的捐款账户，是否确定退款？',
+              [
+                {
+                  text: '取消'
+                },
+                {
+                  text: '确认退款',
+                  onPress: () => {
+                    console.warn('hello')
+                  }
+                }
+              ]
+            )
+          }
+        }
+      ]
+    }
+
     this.modalApis = [
       LoadingInfo,
       LoadingHUD,
-      Modals
+      Modals,
+      Alerts
     ]
   }
 

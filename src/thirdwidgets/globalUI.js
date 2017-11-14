@@ -3,35 +3,65 @@
  */
 import React, {Component} from 'react';
 
-import GlobalModal from './widgets/box/modal/globalmodal'
+import GlobalAlert from './widgets/box/alert/globalAlert'
+import GlobalModal from './widgets/box/modal/globalModal'
 import globalPopUp from './widgets/box/popup/globalPopUp'
-import globalCustom from './widgets/rootsiblings/globalCustom'
+import GlobalCustom from './widgets/rootsiblings/globalCustom'
 
-import Loading from './widgets/box/loading/loading'
-import HUD from './widgets/box/hud/hud'
+import LoadingComponet from './widgets/box/loading/loading'
+import HUDComponet from './widgets/box/hud/hud'
 
 
-const showLoading = (options) => {
-  hideLoading()
-  show(Loading, options)
+const Alert = {
+  alert: (
+    title,
+    message,
+    callbackOrButtons,
+    styleConfig,
+    wrapStyle
+  ) => {
+    GlobalAlert.hideAlert()
+    GlobalAlert.showAlert(
+      title,
+      message,
+      callbackOrButtons,
+      styleConfig,
+      wrapStyle
+    )
+  },
+  hide: GlobalAlert.hideAlert
 }
 
-function hideLoading() {
-  globalCustom.hideCustom()
+const Loading = {
+  show: (options) => {
+    GlobalCustom.hideCustom()
+    show(LoadingComponet, options)
+  },
+  hide: GlobalCustom.hideCustom
 }
 
-const showHUD = (options) => {
-  hideLoading()
-  show(HUD, options)
+const HUD = {
+  show: (options) => {
+    GlobalCustom.hideCustom()
+    show(HUDComponet, options)
+  },
+  showSuccess: (options) => {
+    GlobalCustom.hideCustom()
+    let showOpiton = Object.assign({}, options, {hintType: 'success'} )
+    show(HUDComponet, showOpiton)
+  },
+  showFail: (options) => {
+    GlobalCustom.hideCustom()
+    let showOpiton = Object.assign({}, options, {hintType: 'fail'})
+    show(HUDComponet, showOpiton)
+  },
+  hide: GlobalCustom.hideCustom
 }
 
-function hideHUD() {
-  globalCustom.hideCustom()
-}
 
 const show = (custom, params) => {
-  globalCustom.hideCustom()
-  globalCustom.showCustom(custom, params)
+  GlobalCustom.hideCustom()
+  GlobalCustom.showCustom(custom, params)
 }
 
 const showGlobalPopUp = (PopUp, params, wrapParams) => {
@@ -81,11 +111,11 @@ const showGlobalModal = (Modal, params, isCustomWrap = false) => {
 }
 
 export default {
-  showLoading,
-  hideLoading,
 
-  showHUD,
-  hideHUD,
+  Alert,
+  Loading,
+
+  HUD,
 
   showGlobalModal,
   showGlobalPopUp,

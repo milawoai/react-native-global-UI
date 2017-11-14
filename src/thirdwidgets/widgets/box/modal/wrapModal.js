@@ -18,6 +18,8 @@ class WrapModal extends Component {
     onElementClose: PropTypes.func,
     //关闭方法
     closePopUp: Platform.OS === 'android' ? PropTypes.func.isRequired :PropTypes.func,
+
+    closeBtnType: PropTypes.oneOf(['none', 'bottom', 'left']),
   }
 
   static defaultProps = {

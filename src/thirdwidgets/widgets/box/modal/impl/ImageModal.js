@@ -63,11 +63,6 @@ class ImageModal extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -79,14 +74,12 @@ const styles = StyleSheet.create({
     width: px2dp(550)
   },
   closeContainer: {
-    position: 'absolute',
-    bottom: 0,
+    marginTop: 25,
     alignItems: 'center'
   },
   closeImage: {
-    height: px2dp(82),
-    width: px2dp(82),
-    marginBottom: px2dp(54)
+    height: 40,
+    width: 40
   }
 })
 

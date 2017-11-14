@@ -56,7 +56,8 @@ export const MaskWarp = (SubView) => {
       loadingText: '加载中...',
       showIndicator: true,
       maskType: 'full',
-      blockHeight: APPBAR_HEIGHT + STATUSBAR_HEIGHT
+      blockHeight: APPBAR_HEIGHT + STATUSBAR_HEIGHT,
+      opacity: 0.3
     }
 
     initState = (props) => {
@@ -101,7 +102,8 @@ export const MaskWarp = (SubView) => {
         maskStyle,
         maskType,
         blockHeight,
-        contentStyle
+        contentStyle,
+        opacity
       } = this.props
 
       if (!showIndicator) return null
@@ -128,14 +130,14 @@ export const MaskWarp = (SubView) => {
       if (maskType === 'full') {
         MaskedUI = (
           <View style={[bgStyle, alignCenterStyle]}>
-            <View style={[bgStyle, {backgroundColor: 'black', opacity: 0.1}, maskStyle]}/>
+            <View style={[bgStyle, {backgroundColor: 'black', opacity: opacity}, maskStyle]}/>
             <SubView {...injectProps} />
           </View>
         )
       } else if (maskType === 'block') {
         MaskedUI = (
           <View style={[bgStyle, {marginTop: blockHeight}, alignCenterStyle]}>
-            <View style={[bgStyle, {backgroundColor: 'black', opacity: 0.1}, maskStyle]}/>
+            <View style={[bgStyle, {backgroundColor: 'black', opacity: opacity}, maskStyle]}/>
             <SubView {...injectProps} />
           </View>
         )
