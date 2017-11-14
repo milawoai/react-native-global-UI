@@ -15,10 +15,14 @@ class WrapModal extends Component {
     //动画效果：None：没有，slide：底部滑出 (未完成) fade：淡入淡出
     animationType: PropTypes.oneOf(['none', 'slide', 'fade']),
     //关闭监听
-    onRequestClose: PropTypes.func,
+    onElementClose: PropTypes.func,
     //关闭方法
     closePopUp: Platform.OS === 'android' ? PropTypes.func.isRequired :PropTypes.func,
   }
+
+  static defaultProps = {
+    animationType: 'fade'
+  };
 
   constructor (props) {
     super(props)
@@ -95,7 +99,7 @@ class WrapModal extends Component {
 
   closeImmidiate = () => {
     this.props.closeModal && this.props.closeModal()
-    this.props.onRequestClose && this.props.onRequestClose()
+    this.props.onElementClose && this.props.onElementClose()
   }
 }
 

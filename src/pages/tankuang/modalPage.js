@@ -2,7 +2,7 @@
  * Created by ygj on 2017/10/30.
  */
 import React, { Component } from 'react'
-import { StyleSheet, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native'
+import { StyleSheet, Image, View, TouchableOpacity, Text, ScrollView, Alert} from 'react-native'
 import { px2dp , px2sp} from '../../utils/screenUtils'
 import { lineWarpStyle} from '../../thirdwidgets/res/commonStyle'
 import GlobalUI from '../../thirdwidgets/globalUI'
@@ -88,10 +88,7 @@ export default class ModalPage extends Component {
         },
         {// GlobalUI.hideLoading()
           text: '隐藏Loading',
-          onPress: () => {
-            GlobalUI.ModalBuilder('modalName').injectParams({'test1': 1}).injectParams({'test2': 2}).test()
-          }
-          //onPress: GlobalUI.hideHUD
+          onPress: GlobalUI.hideHUD
         }
       ]
     }
@@ -100,26 +97,17 @@ export default class ModalPage extends Component {
       title: 'Modal',
       buttonInfos: [
         {// GlobalUI.showHUD({hintType: 'success'})
-          text: '',
-          onPress: GlobalUI.showHUD,
-          params: {
-            hintType: 'success',
-            maskType: 'none'
+          text: '图片弹框',
+          onPress: () => {
+            GlobalUI.ModalBuilder('ImageModal').injectParams(
+              {
+                'handleModalSureClick': () => {
+                  Alert.alert('handleBtnClick')
+                },
+                'adImageUrl': ''
+              }
+            ).show()
           }
-        },
-        {// GlobalUI.showLoading({maskType: 'block'})
-          text: 'fail',
-          onPress: GlobalUI.showHUD,
-          params: {hintType: 'fail'}
-        },
-        {// GlobalUI.showLoading({maskType: 'none', disappearTime: 5000})
-          text: '设定时间',
-          onPress: GlobalUI.showHUD,
-          params: {hintType: 'success', disappearTime: 5000}
-        },
-        {// GlobalUI.hideLoading()
-          text: '隐藏Loading',
-          onPress: GlobalUI.hideHUD
         }
       ]
     }

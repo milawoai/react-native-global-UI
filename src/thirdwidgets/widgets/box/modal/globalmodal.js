@@ -3,11 +3,11 @@
  */
 import React, {Component} from 'react';
 import RootSiblings from '../../rootsiblings/SiblingsManager'
-import AdModal from './impl/adModal'
+import ImageModal from './impl/ImageModal'
 import WrapModal from './wrapModal'
 
 const Modals = {
-  'AdModal': AdModal
+  'ImageModal': ImageModal
 }
 
 let rootSiblingInstanceModal = ''
@@ -52,7 +52,7 @@ const showModal = (Modal, params, warpParams) => {
 }
 
 export default {
-    hideModal,
-    showModal,
-    showWarpedModal
+  hideModal,
+  showModal,
+  showWarpedModal
 }

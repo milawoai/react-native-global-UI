@@ -3,50 +3,60 @@
  */
 import React, { Component } from 'react'
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native'
-import Xmodal from '../wrapModal'
 import {px2dp} from "../../../../utils/screenUtils"
-import links from '../../../../res/links'
+import {bk_ad_modal, ic_model_close} from '../../../../res/links'
+import PropTypes from 'prop-types'
 
-class AdModal extends Component {
+class ImageModal extends Component {
 
   constructor (props) {
     super(props)
   }
 
+  static propTypes = {
+    ...View.propTypes,
+    //动画效果：None：没有，slide：底部滑出 (未完成) fade：淡入淡出
+    adImageUrl: PropTypes.string,
+    //点击事件
+    handleModalSureClick: PropTypes.func,
+    //关闭监听
+    onElementClose: PropTypes.func,
+  }
+
   render () {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress = {this.clickAdBtn}
+        <TouchableOpacity onPress = {this.clickImage}
                           style={[styles.adImageContainer]}
                           activeOpacity={0.9}>
           <Image source={
             this.props && this.props.adImageUrl?
               {
-                uri:this.props.adImageUrl,
-                cache: 'force-cache'
-              }:links.specialins}
+                uri: this.props.adImageUrl,
+              }:bk_ad_modal}
                  style={[styles.adImage]}
                  resizeMode={'contain'}
-                 defaultSource={links.specialins}
+                 defaultSource={bk_ad_modal}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress = {this.closeModal}
                           style={[styles.closeContainer]}
                           activeOpacity={0.9}>
           <Image source={
-            links.adCloseIcon
+            ic_model_close
           } style={[styles.closeImage]}/>
         </TouchableOpacity>
       </View>
     )
   }
 
-  clickAdBtn = () => {
-    this.props.handleBtnClick && this.props.handleBtnClick()
+  clickImage = () => {
+    this.props.handleModalSureClick && this.props.handleModalSureClick()
     this.props.startCloseAction && this.props.startCloseAction()
   }
 
   closeModal = () => {
+    this.props.onElementClose && this.props.onElementClose()
     this.props.startCloseAction && this.props.startCloseAction()
   }
 }
@@ -80,4 +90,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AdModal
+export default ImageModal

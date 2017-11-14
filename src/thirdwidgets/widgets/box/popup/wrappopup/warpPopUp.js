@@ -20,7 +20,7 @@ export default class XPopUp extends Component {
     //动画效果：None：没有，slide：底部滑出
     animationType: PropTypes.oneOf(['none', 'slide']),
     //关闭监听
-    onRequestClose: PropTypes.func,
+    onElementClose: PropTypes.func,
     //关闭popup
     closePopUp: PropTypes.func,
 
@@ -123,7 +123,7 @@ export default class XPopUp extends Component {
   }
 
   closeImmidiate = () => {
-    this.props.onRequestClose && this.props.onRequestClose()
+    this.props.onElementClose && this.props.onElementClose()
   }
 
 }
