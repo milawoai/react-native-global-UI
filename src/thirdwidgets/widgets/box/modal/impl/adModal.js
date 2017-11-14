@@ -3,9 +3,9 @@
  */
 import React, { Component } from 'react'
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native'
-import Xmodal from '../wrapmodal/wrapModal'
-import {px2dp} from "../../../utils/screenUtils"
-import links from '../../../res/links'
+import Xmodal from '../wrapModal'
+import {px2dp} from "../../../../utils/screenUtils"
+import links from '../../../../res/links'
 
 class AdModal extends Component {
 

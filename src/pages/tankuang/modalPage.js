@@ -88,6 +88,37 @@ export default class ModalPage extends Component {
         },
         {// GlobalUI.hideLoading()
           text: '隐藏Loading',
+          onPress: () => {
+            GlobalUI.ModalBuilder('modalName').injectParams({'test1': 1}).injectParams({'test2': 2}).test()
+          }
+          //onPress: GlobalUI.hideHUD
+        }
+      ]
+    }
+
+    const Modals = {
+      title: 'Modal',
+      buttonInfos: [
+        {// GlobalUI.showHUD({hintType: 'success'})
+          text: '',
+          onPress: GlobalUI.showHUD,
+          params: {
+            hintType: 'success',
+            maskType: 'none'
+          }
+        },
+        {// GlobalUI.showLoading({maskType: 'block'})
+          text: 'fail',
+          onPress: GlobalUI.showHUD,
+          params: {hintType: 'fail'}
+        },
+        {// GlobalUI.showLoading({maskType: 'none', disappearTime: 5000})
+          text: '设定时间',
+          onPress: GlobalUI.showHUD,
+          params: {hintType: 'success', disappearTime: 5000}
+        },
+        {// GlobalUI.hideLoading()
+          text: '隐藏Loading',
           onPress: GlobalUI.hideHUD
         }
       ]
@@ -95,7 +126,8 @@ export default class ModalPage extends Component {
 
     this.modalApis = [
       LoadingInfo,
-      LoadingHUD
+      LoadingHUD,
+      Modals
     ]
   }
 

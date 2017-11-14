@@ -10,8 +10,8 @@ import {
   Image, TouchableOpacity,
   Text, LayoutAnimation,
   Platform,UIManager} from 'react-native'
-import {px2dp} from "../../../utils/screenUtils"
-import links from '../../../res/links'
+import {px2dp} from "../../../../utils/screenUtils"
+import links from '../../../../res/links'
 
 export default class XPopUp extends Component {
 

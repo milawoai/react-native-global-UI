@@ -3,12 +3,12 @@
  */
 import React, {Component} from 'react';
 
-import GlobalModal from './widgets/modal/globalmodal'
-import globalPopUp from './widgets/popup/globalPopUp'
+import GlobalModal from './widgets/box/modal/globalmodal'
+import globalPopUp from './widgets/box/popup/globalPopUp'
 import globalCustom from './widgets/rootsiblings/globalCustom'
 
-import Loading from './widgets/MaskNest/loading/loading'
-import HUD from './widgets/MaskNest/hud/hud'
+import Loading from './widgets/box/loading/loading'
+import HUD from './widgets/box/hud/hud'
 
 
 const showLoading = (options) => {
@@ -34,14 +34,50 @@ const show = (custom, params) => {
   globalCustom.showCustom(custom, params)
 }
 
-const showGlobalModal = (ModalName, params) => {
-  GlobalModal.hideModal()
-  GlobalModal.showModal(ModalName, params)
+const showGlobalPopUp = (PopUp, params, wrapParams) => {
+  globalPopUp.hidePopup()
+  globalPopUp.showPopup(PopUp, params, wrapParams)
 }
 
-const showGlobalPopUp = (PopUpName, params, wrapParams) => {
-  globalPopUp.hidePopup()
-  globalPopUp.showPopup(PopUpName, params, wrapParams)
+const ModalBuilder = (modal) => {
+
+  let resultParams = {}
+
+  let isCustomWrap = false
+
+  const injectParams = function(params) {
+    resultParams = Object.assign(resultParams, params);
+    return this
+  }
+
+  const declareCustomWrap = function() {
+    isCustomWrap = true
+    return this
+  }
+
+  const show = function() {
+    showGlobalModal(modal, resultParams, isCustomWrap)
+  }
+
+  const test = function() {
+    console.warn(JSON.stringify(resultParams))
+  }
+
+  return {
+    injectParams,
+    declareCustomWrap,
+    show,
+    test
+  }
+}
+
+const showGlobalModal = (Modal, params, isCustomWrap = false) => {
+  GlobalModal.hideModal()
+  if (isCustomWrap) {
+    GlobalModal.showWarpedModal(Modal, params)
+  } else {
+    GlobalModal.showModal(Modal, params)
+  }
 }
 
 export default {
@@ -54,5 +90,5 @@ export default {
   showGlobalModal,
   showGlobalPopUp,
 
-  show
+  ModalBuilder
 }

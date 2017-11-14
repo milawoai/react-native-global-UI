@@ -2,7 +2,7 @@
  * Created by ygj on 2017/8/9.
  */
 import React, {Component} from 'react';
-import RootSiblings from '../rootsiblings/SiblingsManager'
+import RootSiblings from '../../rootsiblings/SiblingsManager'
 import WarpPopUp from './wrappopup/warpPopUp'
 
 
