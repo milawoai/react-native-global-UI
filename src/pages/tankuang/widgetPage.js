@@ -44,7 +44,7 @@ class CellItem extends Component {
   }
 }
 
-export default class ModalPage extends Component {
+export default class WidgetPage extends Component {
   constructor(props) {
     super(props);
 
@@ -196,8 +196,7 @@ export default class ModalPage extends Component {
                 maskType: 'block'
               }
             )
-          },
-
+          }
         }
       ]
     }

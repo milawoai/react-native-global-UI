@@ -10,6 +10,7 @@ import { px2dp } from '../utils/screenUtils'
 import Icon from 'react-native-vector-icons/EvilIcons'
 
 import ModalPage from './tankuang/modalPage'
+import WidgetPage from './tankuang/widgetPage'
 
 const tabNavigatorConf = {
   initialRouteName: 'Home',
@@ -39,6 +40,16 @@ const MainTab = TabNavigator({
       title: '弹框UI',
       tabBarIcon: ({tintColor}) => (
         <Icon name="refresh" size={25} color={tintColor} />
+      ),
+    })
+  },
+  page2: {
+    screen: WidgetPage,
+    navigationOptions: ({navigation}) => ({
+      tabBarLabel: '组件UI',
+      title: '组件UI',
+      tabBarIcon: ({tintColor}) => (
+        <Icon name="bell" size={25} color={tintColor} />
       ),
     })
   },

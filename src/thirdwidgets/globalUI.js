@@ -12,7 +12,7 @@ import LoadingComponet from './widgets/box/loading/loading'
 import HUDComponet from './widgets/box/hud/hud'
 
 
-const Alert = {
+export const Alert = {
   alert: (
     title,
     message,
@@ -32,7 +32,12 @@ const Alert = {
   hide: GlobalAlert.hideAlert
 }
 
-const Loading = {
+const show = (custom, params) => {
+  GlobalCustom.hideCustom()
+  GlobalCustom.showCustom(custom, params)
+}
+
+export const Loading = {
   show: (options) => {
     GlobalCustom.hideCustom()
     show(LoadingComponet, options)
@@ -40,7 +45,7 @@ const Loading = {
   hide: GlobalCustom.hideCustom
 }
 
-const HUD = {
+export const HUD = {
   show: (options) => {
     GlobalCustom.hideCustom()
     show(HUDComponet, options)
@@ -58,18 +63,7 @@ const HUD = {
   hide: GlobalCustom.hideCustom
 }
 
-
-const show = (custom, params) => {
-  GlobalCustom.hideCustom()
-  GlobalCustom.showCustom(custom, params)
-}
-
-const showGlobalPopUp = (PopUp, params, wrapParams) => {
-  globalPopUp.hidePopup()
-  globalPopUp.showPopup(PopUp, params, wrapParams)
-}
-
-const ModalBuilder = (modal) => {
+export const ModalBuilder = (modal) => {
 
   let resultParams = {}
 
@@ -110,15 +104,8 @@ const showGlobalModal = (Modal, params, isCustomWrap = false) => {
   }
 }
 
-export default {
-
-  Alert,
-  Loading,
-
-  HUD,
-
-  showGlobalModal,
-  showGlobalPopUp,
-
-  ModalBuilder
+const showGlobalPopUp = (PopUp, params, wrapParams) => {
+  globalPopUp.hidePopup()
+  globalPopUp.showPopup(PopUp, params, wrapParams)
 }
+

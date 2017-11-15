@@ -34,7 +34,7 @@ const {width, height} = Dimensions.get('window')
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
-export const MaskWarp = (SubView) => {
+export const MaskWarp = (SubView, maskConfig) => {
   class MaskWarpView extends Component {
 
     static propTypes = {
@@ -50,6 +50,8 @@ export const MaskWarp = (SubView) => {
       blockHeight: PropTypes.number,
       // mask背景Style
       maskStyle: ViewPropTypes.style,
+
+      opacity:  PropTypes.number,
     };
 
     static defaultProps = {
@@ -98,13 +100,19 @@ export const MaskWarp = (SubView) => {
         showIndicator
       } = this.state
 
+      let maskConfigs = Object.assign(
+        {},
+        maskConfig,
+        this.props
+      )
+
       const {
         maskStyle,
         maskType,
         blockHeight,
         contentStyle,
         opacity
-      } = this.props
+      } = maskConfigs
 
       if (!showIndicator) return null
 

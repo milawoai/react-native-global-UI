@@ -10,9 +10,10 @@
     "lodash": "^4.17.4",
     "react": "16.0.0-beta.5",
     "react-native": "0.49.5",
+    "react-native-linear-gradient": "^2.3.0",
+    "react-native-vector-icons": "^4.3.0",
     "react-navigation": "^1.0.0-beta.15",
-    "static-container": "^1.2.0",
-    "react-native-vector-icons": "^4.3.0"
+    "static-container": "^1.2.0"
   },
   "devDependencies": {
     "babel-jest": "21.2.0",

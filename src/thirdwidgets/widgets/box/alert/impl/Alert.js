@@ -45,7 +45,7 @@ class Alert extends Component {
 
   render () {
     const {title, message, callbackOrButtons, styleConfig, closeAlert} = this.props
-    let customCallbackOrButtons = callbackOrButtons?
+    let customCallbackOrButtons = callbackOrButtons && callbackOrButtons.length > 0?
       callbackOrButtons.map((elem, index) => {
         if (!elem.onPress) {
           elem.onPress = closeAlert
@@ -81,7 +81,7 @@ class Alert extends Component {
           message ?
             <View style={[styles.messageContainer, messageContainer]}>
               <Text style={[styles.messageText, {color: commonColors.textHintColor}, messageText]}t>
-                {title}
+                {message}
               </Text>
             </View>
             : null
