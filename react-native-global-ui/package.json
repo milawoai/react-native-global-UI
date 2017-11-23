@@ -1,0 +1,27 @@
+{
+  "name": "react-native-global-ui",
+  "version": "1.0.0",
+  "description": "react native global UI ,contain alert, loading, HUD, Modal and so on",
+  "main": "globalUI.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milawoai/react-native-global-UI.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react",
+    "native",
+    "global",
+    "loading"
+  ],
+  "author": "bing-zhi-lian-qu@163.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/milawoai/react-native-global-UI/issues"
+  },
+  "homepage": "https://github.com/milawoai/react-native-global-UI#readme"
+}
