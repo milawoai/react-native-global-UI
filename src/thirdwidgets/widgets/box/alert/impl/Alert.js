@@ -12,6 +12,7 @@ import {MaskWarp} from '../../MaskNest'
 import PropTypes from 'prop-types'
 import {getColors} from '../../../../config/config'
 
+
 class Alert extends Component {
 
   constructor (props) {
@@ -61,7 +62,7 @@ class Alert extends Component {
     const {container,
       titleContainer, titleText,
       messageContainer, messageText,
-      buttonAreaContainer, buttonContainer,  buttonText
+      buttonAreaContainer, buttonContainer, buttonText
     } = styleConfig
 
     const commonColors = getColors()

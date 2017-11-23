@@ -5,7 +5,7 @@
  * Created by ygj on 2017/10/27.
  */
 'use strict'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import {
   Text,
   View,
@@ -13,9 +13,11 @@ import {
   StyleSheet
 } from 'react-native'
 
+import PropTypes from 'prop-types'
+
 const ViewPropTypes = require('ViewPropTypes');
 
-class ImageWithTitle extends Component {
+class ImageWithText extends Component {
 
   static propTypes = {
     text: PropTypes.string,
@@ -28,10 +30,12 @@ class ImageWithTitle extends Component {
     ]),
     textStyle: PropTypes.oneOfType([
       PropTypes.object,
+      PropTypes.array,
       PropTypes.number
     ]),
     imageStyle: PropTypes.oneOfType([
       PropTypes.object,
+      PropTypes.array,
       PropTypes.number
     ]),
     wrapStyle: ViewPropTypes.style,
@@ -56,6 +60,7 @@ class ImageWithTitle extends Component {
   }
 
   renderVertical = () => {
+
     let {text, textStyle, image, imageStyle, wrapStyle, renderImage} = this.props
 
     let imageView = null
@@ -97,4 +102,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ImageWithTitle
+export default ImageWithText

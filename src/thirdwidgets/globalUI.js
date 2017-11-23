@@ -11,6 +11,14 @@ import GlobalCustom from './widgets/rootsiblings/globalCustom'
 import LoadingComponet from './widgets/box/loading/loading'
 import HUDComponet from './widgets/box/hud/hud'
 
+/*
+callbackOrButtons : {
+  text,
+  onPress,
+  containerStyle,
+  textStyle
+}
+*/
 
 export const Alert = {
   alert: (
@@ -20,14 +28,76 @@ export const Alert = {
     styleConfig,
     wrapStyle
   ) => {
+    let alertConfig = GlobalAlert.getAlertConfig()
     GlobalAlert.hideAlert()
     GlobalAlert.showAlert(
       title,
       message,
       callbackOrButtons,
-      styleConfig,
-      wrapStyle
+      Object.assign({}, styleConfig, alertConfig.styleConfig),
+      Object.assign({}, wrapStyle, alertConfig.wrapStyle)
     )
+  },
+
+  /*
+   callbackOrButtons : {
+   text,
+   onPress,
+   containerStyle,
+   textStyle
+   }
+   */
+
+  alertCancelConfirm: (
+    title,
+    message,
+      {
+        cancelConfig,
+        confirmConfig,
+        reserve
+      },
+    wrapStyleConfig
+  ) => {
+    let alertConfig = GlobalAlert.getAlertConfig()
+    cancelConfig = Object.assign({}, alertConfig? alertConfig.cancelConfig :{} , cancelConfig)
+    confirmConfig = Object.assign({}, alertConfig? alertConfig.confirmConfig :{} , confirmConfig)
+
+    if (!cancelConfig) {
+      cancelConfig = {
+        text: '取消'
+      }
+    }
+    if (!confirmConfig) {
+      cancelConfig = {
+        text: '确认'
+      }
+    }
+
+
+    GlobalAlert.hideAlert()
+    let callbackOrButtons = [
+      cancelConfig,
+      {
+        text: '确认退款',
+        onPress: () => {
+          handleConfirm()
+        },
+        textStyle: confirmTextStyle,
+        containerStyle: confirmTextStyle
+      }
+    ]
+    GlobalAlert.showAlert(
+      title,
+      message,
+      callbackOrButtons,
+      alertConfig.styleConfig,
+      wrapStyleConfig ? wrapStyleConfig: alertConfig.wrapStyleConfig
+    )
+  },
+  setDefaultConfig : (configKey, configValue) => {
+    let newConfig = {}
+    newConfig[configKey] = configValue
+    GlobalAlert.setAlertConfig(newConfig)
   },
   hide: GlobalAlert.hideAlert
 }
@@ -52,13 +122,13 @@ export const HUD = {
   },
   showSuccess: (options) => {
     GlobalCustom.hideCustom()
-    let showOpiton = Object.assign({}, options, {hintType: 'success'} )
-    show(HUDComponet, showOpiton)
+    let showOption = Object.assign({}, options, {hintType: 'success'} )
+    show(HUDComponet, showOption)
   },
   showFail: (options) => {
     GlobalCustom.hideCustom()
-    let showOpiton = Object.assign({}, options, {hintType: 'fail'})
-    show(HUDComponet, showOpiton)
+    let showOption = Object.assign({}, options, {hintType: 'fail'})
+    show(HUDComponet, showOption)
   },
   hide: GlobalCustom.hideCustom
 }

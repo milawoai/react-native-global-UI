@@ -7,6 +7,16 @@ import Alert from './impl/Alert'
 
 let rootSiblingInstanceAlert = ''
 
+let alertConfig = {}
+
+const setAlertConfig = (config) => {
+  alertConfig = Object.assign(alertConfig, config)
+}
+
+const getAlertConfig = () => {
+  return alertConfig ? alertConfig : {}
+}
+
 const hideAlert = () => {
   if (rootSiblingInstanceAlert instanceof RootSiblings) {
     rootSiblingInstanceAlert.destroy();
@@ -21,12 +31,14 @@ const showAlert = (
 ) => {
   hideAlert()
   if (!title|| !message) return
-  let fixParams = Object.assign({
-    title,
-    message,
-    callbackOrButtons,
-    styleConfig
-  },{closeAlert: hideAlert}, wrapStyle)
+  let fixParams = Object.assign(
+    {
+      title,
+      message,
+      callbackOrButtons,
+      styleConfig: styleConfig ? styleConfig :alertConfig.styleConfig
+    },{closeAlert: hideAlert},
+    wrapStyle ? wrapStyle : alertConfig.wrapStyle)
   const renderContent = (
     <Alert {...fixParams} />
   )
@@ -36,5 +48,7 @@ const showAlert = (
 
 export default {
   hideAlert,
-  showAlert
+  showAlert,
+  setAlertConfig,
+  getAlertConfig
 }

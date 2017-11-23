@@ -9,7 +9,6 @@ import {
   Alert,
   Loading,
   HUD,
-
   ModalBuilder
 } from '../../thirdwidgets/globalUI'
 import {getColors} from '../../thirdwidgets/config/config'
@@ -114,6 +113,22 @@ export default class ModalPage extends Component {
               }
             ).show()
           }
+        },
+        {
+          text: '说明弹框',
+          onPress: () => {
+            ModalBuilder('HintModal').injectParams(
+              {
+                'handleButtonClick': () => {
+                  Alert.alert('handleButtonClick')
+                },
+                containerStyle: {
+                  borderRadius: px2dp(20)
+                },
+                title: '阿姨洗铁路'
+              }
+            ).show()
+          }
         }
       ]
     }
@@ -121,6 +136,31 @@ export default class ModalPage extends Component {
     const Alerts = {
       title: 'Alert',
       buttonInfos: [
+        {
+          text: '普通提示弹框',
+          onPress: () => {
+            Alert.alert(
+              '退款确认',
+              '退款将在5-7个工作日内退到您的捐款账户，是否确定退款？',
+              [
+                {
+                  text: '取消'
+                },
+                {
+                  text: '确认退款',
+                  onPress: () => {
+                    console.warn('hello')
+                    Alert.hide()
+                  },
+                  textStyle: {
+                    color: getColors().mainColor,
+                    fontWeight: '500'
+                  }
+                }
+              ]
+            )
+          }
+        },
         {
           text: '普通提示弹框',
           onPress: () => {
@@ -184,7 +224,7 @@ export default class ModalPage extends Component {
           }
         },
         {
-          text: '改变背景',
+          text: '改变Mask',
           onPress: () => {
             Alert.alert(
               '退款确认',

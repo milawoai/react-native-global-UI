@@ -3,11 +3,13 @@
  */
 import React, {Component} from 'react';
 import RootSiblings from '../../rootsiblings/SiblingsManager'
-import ImageModal from './impl/ImageModal'
+import ImageModal from './impl/imageModal'
+import HintModal from './impl/hintModal'
 import WrapModal from './wrapModal'
 
 const Modals = {
-  'ImageModal': ImageModal
+  'ImageModal': ImageModal,
+  'HintModal': HintModal
 }
 
 let rootSiblingInstanceModal = ''
