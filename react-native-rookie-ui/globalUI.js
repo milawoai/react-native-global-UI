@@ -38,16 +38,6 @@ export const Alert = {
       Object.assign({}, wrapStyle, alertConfig.wrapStyle)
     )
   },
-
-  /*
-   callbackOrButtons : {
-   text,
-   onPress,
-   containerStyle,
-   textStyle
-   }
-   */
-
   alertCancelConfirm: (
     title,
     message,
@@ -72,7 +62,6 @@ export const Alert = {
         text: '确认'
       }
     }
-
 
     GlobalAlert.hideAlert()
     let callbackOrButtons = [
