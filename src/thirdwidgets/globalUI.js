@@ -8,8 +8,8 @@ import GlobalModal from './widgets/box/modal/globalModal'
 import globalPopUp from './widgets/box/popup/globalPopUp'
 import GlobalCustom from './widgets/rootsiblings/globalCustom'
 
-import LoadingComponet from './widgets/box/loading/loading'
-import HUDComponet from './widgets/box/hud/hud'
+import LoadingComponent from './widgets/box/loading/loading'
+import HUDComponent from './widgets/box/hud/hud'
 
 /*
 callbackOrButtons : {
@@ -110,7 +110,7 @@ const show = (custom, params) => {
 export const Loading = {
   show: (options) => {
     GlobalCustom.hideCustom()
-    show(LoadingComponet, options)
+    show(LoadingComponent, options)
   },
   hide: GlobalCustom.hideCustom
 }
@@ -118,17 +118,17 @@ export const Loading = {
 export const HUD = {
   show: (options) => {
     GlobalCustom.hideCustom()
-    show(HUDComponet, options)
+    show(HUDComponent, options)
   },
   showSuccess: (options) => {
     GlobalCustom.hideCustom()
     let showOption = Object.assign({}, options, {hintType: 'success'} )
-    show(HUDComponet, showOption)
+    show(HUDComponent, showOption)
   },
   showFail: (options) => {
     GlobalCustom.hideCustom()
     let showOption = Object.assign({}, options, {hintType: 'fail'})
-    show(HUDComponet, showOption)
+    show(HUDComponent, showOption)
   },
   hide: GlobalCustom.hideCustom
 }
