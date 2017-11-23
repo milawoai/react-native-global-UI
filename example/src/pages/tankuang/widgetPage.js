@@ -4,15 +4,14 @@
 import React, { Component } from 'react'
 import { StyleSheet, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native'
 import { px2dp , px2sp} from '../../utils/screenUtils'
-import { lineWarpStyle} from '../../react-native-rookie-ui/res/commonStyle'
+import { lineWarpStyle} from '../../react-native-global-ui/res/commonStyle'
 import {
   Alert,
   Loading,
   HUD,
-
   ModalBuilder
-} from '../../react-native-rookie-ui/globalUI'
-import {getColors} from '../../react-native-rookie-ui/config/config'
+} from '../../react-native-global-ui/globalUI'
+import {getColors} from '../../react-native-global-ui/config/config'
 
 
 class CellItem extends Component {
