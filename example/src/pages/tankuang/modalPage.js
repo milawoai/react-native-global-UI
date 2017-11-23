@@ -4,14 +4,14 @@
 import React, { Component } from 'react'
 import { StyleSheet, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native'
 import { px2dp , px2sp} from '../../utils/screenUtils'
-import { lineWarpStyle} from '../../react-native-global-ui/res/commonStyle'
 import {
   Alert,
   Loading,
   HUD,
-  ModalBuilder
-} from '../../react-native-global-ui/globalUI'
-import {getColors} from '../../react-native-global-ui/config/config'
+  ModalBuilder,
+  commonStyle,
+  commonConfig
+} from '../../react-native-global-ui'
 
 
 class CellItem extends Component {
@@ -35,7 +35,7 @@ class CellItem extends Component {
         <View style = {CellItemStyle.cellTitleContainer}>
           <Text style={CellItemStyle.cellTitle}>{title}</Text>
         </View>
-        <View style={[CellItemStyle.buttonAreaContainer, lineWarpStyle]}>
+        <View style={[CellItemStyle.buttonAreaContainer, commonStyle.lineWarpStyle]}>
           {buttonArea}
         </View>
       </View>
@@ -149,11 +149,10 @@ export default class ModalPage extends Component {
                 {
                   text: '确认退款',
                   onPress: () => {
-                    console.warn('hello')
                     Alert.hide()
                   },
                   textStyle: {
-                    color: getColors().mainColor,
+                    color: commonConfig.getColors().mainColor,
                     fontWeight: '500'
                   }
                 }

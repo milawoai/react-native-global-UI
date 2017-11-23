@@ -4,14 +4,14 @@
 import React, { Component } from 'react'
 import { StyleSheet, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native'
 import { px2dp , px2sp} from '../../utils/screenUtils'
-import { lineWarpStyle} from '../../react-native-global-ui/res/commonStyle'
 import {
   Alert,
   Loading,
   HUD,
-  ModalBuilder
-} from '../../react-native-global-ui/globalUI'
-import {getColors} from '../../react-native-global-ui/config/config'
+  ModalBuilder,
+  commonStyle,
+  config
+} from '../../react-native-global-ui'
 
 
 class CellItem extends Component {
@@ -35,7 +35,7 @@ class CellItem extends Component {
         <View style = {CellItemStyle.cellTitleContainer}>
           <Text style={CellItemStyle.cellTitle}>{title}</Text>
         </View>
-        <View style={[CellItemStyle.buttonAreaContainer, lineWarpStyle]}>
+        <View style={[CellItemStyle.buttonAreaContainer, commonStyle.lineWarpStyle]}>
           {buttonArea}
         </View>
       </View>
@@ -113,6 +113,22 @@ export default class WidgetPage extends Component {
               }
             ).show()
           }
+        },
+        {
+          text: '说明弹框',
+          onPress: () => {
+            ModalBuilder('HintModal').injectParams(
+              {
+                'handleButtonClick': () => {
+                  Alert.alert('handleButtonClick')
+                },
+                containerStyle: {
+                  borderRadius: px2dp(20)
+                },
+                title: '阿姨洗铁路'
+              }
+            ).show()
+          }
         }
       ]
     }
@@ -120,6 +136,31 @@ export default class WidgetPage extends Component {
     const Alerts = {
       title: 'Alert',
       buttonInfos: [
+        {
+          text: '普通提示弹框',
+          onPress: () => {
+            Alert.alert(
+              '退款确认',
+              '退款将在5-7个工作日内退到您的捐款账户，是否确定退款？',
+              [
+                {
+                  text: '取消'
+                },
+                {
+                  text: '确认退款',
+                  onPress: () => {
+                    console.warn('hello')
+                    Alert.hide()
+                  },
+                  textStyle: {
+                    color: config.getColors().mainColor,
+                    fontWeight: '500'
+                  }
+                }
+              ]
+            )
+          }
+        },
         {
           text: '普通提示弹框',
           onPress: () => {
@@ -183,7 +224,7 @@ export default class WidgetPage extends Component {
           }
         },
         {
-          text: '改变背景',
+          text: '改变Mask',
           onPress: () => {
             Alert.alert(
               '退款确认',
@@ -195,7 +236,8 @@ export default class WidgetPage extends Component {
                 maskType: 'block'
               }
             )
-          }
+          },
+
         }
       ]
     }
@@ -226,7 +268,7 @@ export default class WidgetPage extends Component {
 
 const CellItemStyle = {
   cellContainer: {
-   paddingBottom: px2dp(20)
+    paddingBottom: px2dp(20)
   },
   cellTitleContainer: {
     backgroundColor: '#C0C0C0',
@@ -236,7 +278,7 @@ const CellItemStyle = {
     alignSelf: 'stretch'
   },
   cellTitle: {
-   fontSize: px2sp(30)
+    fontSize: px2sp(30)
   },
   buttonAreaContainer: {
     flexDirection: 'row',

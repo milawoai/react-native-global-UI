@@ -11,7 +11,10 @@ import GlobalCustom from './widgets/rootsiblings/globalCustom'
 import LoadingComponent from './widgets/box/loading/loading'
 import HUDComponent from './widgets/box/hud/hud'
 
-/*
+import * as Config from './config/config'
+import * as CommonStyle from './res/commonStyle'
+
+/* Alert 
 callbackOrButtons : {
   text,
   onPress,
@@ -19,6 +22,14 @@ callbackOrButtons : {
   textStyle
 }
 */
+
+export const commonConfig = {
+  ...Config
+}
+
+export const commonStyle = {
+  ...CommonStyle
+}
 
 export const Alert = {
   alert: (
@@ -90,6 +101,12 @@ export const Alert = {
   },
   hide: GlobalAlert.hideAlert
 }
+
+
+/**************
+
+Loading
+*/
 
 const show = (custom, params) => {
   GlobalCustom.hideCustom()
