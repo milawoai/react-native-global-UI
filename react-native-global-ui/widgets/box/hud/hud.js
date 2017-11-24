@@ -10,11 +10,11 @@ import {
   View,
   Text,
   Image,
-  Platform
+  Platform,
+  ViewPropTypes,
+  ColorPropType
 } from 'react-native';
 
-const ViewPropTypes = require('ViewPropTypes');
-const ColorPropType = require('ColorPropType');
 
 import {icon_success_HUD, icon_error_HUD} from '../../../res/links'
 import {bgStyle, alignCenterStyle} from '../../../res/commonStyle'

@@ -1,6 +1,6 @@
 {
   "name": "react-native-global-ui",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "react native global UI ,contain alert, loading, HUD, Modal and so on",
   "main": "index.js",
   "scripts": {

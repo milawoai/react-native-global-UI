@@ -7,11 +7,10 @@ import {
   View,
   Text,
   ActivityIndicator,
-  Platform
+  Platform,
+  ViewPropTypes,
+  ColorPropType
 } from 'react-native';
-
-const ViewPropTypes = require('ViewPropTypes');
-const ColorPropType = require('ColorPropType');
 
 import {px2dp} from '../../../utils/screenUtils'
 

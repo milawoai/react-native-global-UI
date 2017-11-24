@@ -10,8 +10,8 @@ import {
   HUD,
   ModalBuilder,
   commonStyle,
-  config
-} from '../../react-native-global-ui'
+  commonConfig
+} from 'react-native-global-ui'
 
 
 class CellItem extends Component {
@@ -178,7 +178,7 @@ export default class WidgetPage extends Component {
                     Alert.hide()
                   },
                   textStyle: {
-                    color: getColors().mainColor,
+                    color: commonConfig.getColors().mainColor,
                     fontWeight: '500'
                   }
                 }

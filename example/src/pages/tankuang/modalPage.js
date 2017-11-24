@@ -11,7 +11,7 @@ import {
   ModalBuilder,
   commonStyle,
   commonConfig
-} from '../../react-native-global-ui'
+} from 'react-native-global-ui'
 
 
 class CellItem extends Component {
