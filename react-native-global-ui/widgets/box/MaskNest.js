@@ -10,12 +10,13 @@ import {
   View,
   Text,
   ActivityIndicator,
-  Platform
+  Platform,
+  ViewPropTypes,
+  ColorPropType,
+  ReactNativeComponentTree,
+  Dimensions
 } from 'react-native';
 
-const ViewPropTypes = require('ViewPropTypes');
-const ColorPropType = require('ColorPropType');
-const ReactNativeComponentTree = require('ReactNativeComponentTree');
 
 import {bgStyle, alignCenterStyle} from '../../res/commonStyle'
 
@@ -28,7 +29,6 @@ const defaultStyles = {
   }
 }
 
-let Dimensions = require('Dimensions');
 const {width, height} = Dimensions.get('window')
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;

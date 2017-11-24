@@ -1,7 +1,6 @@
 import React, { cloneElement } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,DeviceEventEmitter} from 'react-native';
 import emitter from './AppRegistryInjection';
-import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter'
 
 const styles = StyleSheet.create({
     offStream: {
@@ -31,10 +30,10 @@ export default class {
     _id = null;
 
     update(element, callback) {
-        RCTDeviceEventEmitter.emit('siblings.update', this._id, this._offStreamElement(element), callback);
+        DeviceEventEmitter.emit('siblings.update', this._id, this._offStreamElement(element), callback);
     };
 
     destroy(callback) {
-        RCTDeviceEventEmitter.emit('siblings.update', this._id, null, callback);
+        DeviceEventEmitter.emit('siblings.update', this._id, null, callback);
     };
 }

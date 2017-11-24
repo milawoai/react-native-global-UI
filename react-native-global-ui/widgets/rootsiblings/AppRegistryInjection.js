@@ -1,13 +1,14 @@
 import {
     StyleSheet,
     View,
-    AppRegistry
+    AppRegistry,
+    DeviceEventEmitter
 } from 'react-native';
 import React, {
     Component
 } from 'react';
+
 import StaticContainer from 'static-container';
-import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter'
 
 const styles = StyleSheet.create({
     container: {
@@ -34,11 +35,11 @@ let isEstablished = false;
 
                 componentWillMount() {
                     this._update = this._update.bind(this);
-                    RCTDeviceEventEmitter.addListener('siblings.update', this._update);
+                    DeviceEventEmitter.addListener('siblings.update', this._update);
                 };
 
                 componentWillUnmount() {
-                    RCTDeviceEventEmitter.removeListener('siblings.update', this._update);
+                    DeviceEventEmitter.removeListener('siblings.update', this._update);
                     siblings.clear();
                     updates.clear();
                 };

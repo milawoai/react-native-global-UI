@@ -12,7 +12,8 @@ import {
   Image,
   Platform,
   ViewPropTypes,
-  ColorPropType
+  ColorPropType,
+  Dimensions
 } from 'react-native';
 
 
@@ -22,7 +23,6 @@ import {px2dp} from '../../../utils/screenUtils'
 
 import {MaskWarp} from '../MaskNest'
 
-let Dimensions = require('Dimensions');
 const {width, height} = Dimensions.get('window')
 
 const defaultStyles = {

@@ -10,12 +10,11 @@ import {
   Text,
   View,
   Image,
-  StyleSheet
+  StyleSheet,
+  ViewPropTypes
 } from 'react-native'
 
 import PropTypes from 'prop-types'
-
-const ViewPropTypes = require('ViewPropTypes');
 
 class ImageWithText extends Component {
 
