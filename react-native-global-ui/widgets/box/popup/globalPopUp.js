@@ -3,8 +3,12 @@
  */
 import React, {Component} from 'react';
 import RootSiblings from '../../rootsiblings/SiblingsManager'
-import WarpPopUp from './wrappopup/warpPopUp'
+import WarpPopUp from './warpPopUp'
+import CollectionPopUp from './impl/collectionPopUp'
 
+const Modals = {
+  'CollectionPopUp': CollectionPopUp,
+}
 
 let rootSiblingInstancePop = ''
 
@@ -14,6 +18,20 @@ const hidePopup = () => {
   } else {
     rootSiblingInstancePop = ''
   }
+}
+
+const showWarpedPopup = (PopUP, params) => {
+  hidePopup()
+  if (typeof PopUP === 'string') {
+    PopUP = Modals[PopUP];
+  }
+  if (!PopUP) return
+  let fixParams = Object.assign({},{closeModal: hidePopup}, params)
+  const renderContent = PopUP?(
+    <PopUP {...fixParams} />
+  ):null
+  rootSiblingInstancePop = new RootSiblings(renderContent)
+  return rootSiblingInstancePop
 }
 
 const showPopup = (PopUP, params, warpParams) => {
@@ -38,5 +56,6 @@ const showPopup = (PopUP, params, warpParams) => {
 
 export default {
   hidePopup,
-  showPopup
+  showPopup,
+  showWarpedPopup
 }

@@ -5,33 +5,32 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {
-  View, StyleSheet
+  View, StyleSheet, Dimensions, PixelRatio ,StatusBar
 } from 'react-native'
 const ViewPropTypes = require('ViewPropTypes');
 
-class CollectionView extends Component {
-  static PropsType = {
+const window = Dimensions.get('window')
+const deviceWidthDp = window.width
 
+class CollectionView extends Component {
+
+  /* staticConfig: {
+        width: //view宽度,
+     }
+  */
+  static PropsType = {
     ...View.propTypes,
 
-    buttonStyle: ViewPropTypes.style,
-    //
-    buttonText: PropTypes.string,
-    //
-    buttonTextStyle: PropTypes.oneOf(
-      PropTypes.string,
-      PropTypes.number
-    ),
-    // button点击事件
-    handleButtonClick: PropTypes.func,
-
-    //
-    renderBottomView: PropTypes.func,
-
     renderItem: PropTypes.func,
+    lineNum: PropTypes.number,
+
     verticalGap: PropTypes.number,
     horizGap: PropTypes.number,
-    dataSource: PropTypes.array
+
+    dataSource: PropTypes.array,
+    staticConfig: PropTypes.object,
+
+    cellContainerStyle: View.propTypes.style
   }
 
   static defaultProps = {
@@ -41,13 +40,29 @@ class CollectionView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      helperCount: 10000
     }
   }
 
   render() {
-    <View style={[ this.props.style, collectionStyles.collectionContainer]}>
-    </View>
+    const {dataSource, renderItem, lineNum, cellContainerStyle, staticConfig} = this.props
+
+    let width = staticConfig  && staticConfig.width ? staticConfig.width : deviceWidthDp
+    let numberLine = Number(lineNum) ? Number(lineNum) : 1
+    let needWidth = width / numberLine
+
+    let innerViewSource = dataSource ? dataSource.map((elem, index) => {
+      return (
+        <View style={[{ width: needWidth, height: needWidth},
+          collectionStyles.cellContainerStyle,cellContainerStyle]} key={index}>
+          {renderItem(elem, index)}
+        </View>
+      )
+    }): null
+    return (
+      <View style={[collectionStyles.collectionContainer, this.props.style]}>
+        {innerViewSource}
+      </View>
+    )
   }
 }
 
@@ -60,5 +75,9 @@ const collectionStyles = StyleSheet.create({
     flexDirection: 'row',
     overflow: 'visible',
     flexWrap: 'wrap',
+  },
+  cellContainerStyle: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

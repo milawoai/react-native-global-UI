@@ -14,8 +14,10 @@ import {
   ViewPropTypes,
   ColorPropType,
   ReactNativeComponentTree,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native';
+import Button from '../button/button'
 
 
 import {bgStyle, alignCenterStyle} from '../../res/commonStyle'
@@ -50,7 +52,8 @@ export const MaskWarp = (SubView, maskConfig) => {
       blockHeight: PropTypes.number,
       // mask背景Style
       maskStyle: ViewPropTypes.style,
-
+      //是否允许点击背景关闭自己
+      bgClose: PropTypes.bool,
       opacity:  PropTypes.number,
     };
 
@@ -67,7 +70,6 @@ export const MaskWarp = (SubView, maskConfig) => {
         showIndicator: props.showIndicator
       }
       if (props.maskType === 'none') {
-
         resultState = Object.assign(resultState,
           {
             centerOpacity: 0,
@@ -96,22 +98,17 @@ export const MaskWarp = (SubView, maskConfig) => {
 
     render() {
 
-      const {
-        showIndicator
-      } = this.state
+      const {showIndicator} = this.state
 
-      let maskConfigs = Object.assign(
-        {},
-        maskConfig,
-        this.props
-      )
+      let maskConfigs = Object.assign({}, maskConfig, this.props)
 
       const {
         maskStyle,
         maskType,
         blockHeight,
         contentStyle,
-        opacity
+        opacity,
+        bgClose
       } = maskConfigs
 
       if (!showIndicator) return null
@@ -135,22 +132,30 @@ export const MaskWarp = (SubView, maskConfig) => {
 
       let MaskedUI = null
 
+      let maskUI = (
+        <View style={[bgStyle, {backgroundColor: 'black', opacity: opacity}, maskStyle]}/>
+      )
+      if (bgClose) {
+        maskUI = (
+          <TouchableOpacity  onPress={this.handleHide} style={[bgStyle, {backgroundColor: 'black', opacity: opacity}, maskStyle]} />
+        )
+      }
+
       if (maskType === 'full') {
         MaskedUI = (
           <View style={[bgStyle, alignCenterStyle]}>
-            <View style={[bgStyle, {backgroundColor: 'black', opacity: opacity}, maskStyle]}/>
-            <SubView {...injectProps} />
+            {maskUI}
+            <SubView {...injectProps} ref = 'subView'/>
           </View>
         )
       } else if (maskType === 'block') {
         MaskedUI = (
           <View style={[bgStyle, {marginTop: blockHeight}, alignCenterStyle]}>
-            <View style={[bgStyle, {backgroundColor: 'black', opacity: opacity}, maskStyle]}/>
-            <SubView {...injectProps} />
+            {maskUI}
+            <SubView {...injectProps} ref = 'subView'/>
           </View>
         )
       } else if (maskType === 'none') {
-
         let noMaskContentStyle = Object.assign({}, defaultStyles.noMaskPosition,
           {
             left: (width - this.state.contentX) / 2,
@@ -168,6 +173,10 @@ export const MaskWarp = (SubView, maskConfig) => {
         console.warn('设置MaskType出错，现在支持 （full， block， none）')
       }
       return MaskedUI;
+    }
+
+    handleHide = () => {
+      this.refs.subView &&  this.refs.subView.hide &&  this.refs.subView.hide()
     }
 
     setContentXY = () => {

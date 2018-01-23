@@ -15,7 +15,6 @@ import {
 
 
 class CellItem extends Component {
-
   render() {
     const {title, buttonInfos} = this.props
 
@@ -57,12 +56,12 @@ export default class ModalPage extends Component {
         {
           text: '露出Nav的loading',
           onPress: Loading.show,
-          params: {maskType: 'block'}
+          params: {maskType: 'block',loadingText: 'nav可点哦'}
         },
         {
           text: '没有Mask的loading',
           onPress: Loading.show,
-          params: {maskType: 'none'}
+          params: {maskType: 'none',loadingText: '旁边的loading可点哦'}
         },
         {
           text: '隐藏Loading',

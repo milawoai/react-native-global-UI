@@ -1,11 +1,12 @@
 /**
  * Created by ygj on 2017/8/9.
  */
+'use strict'
 import React, {Component} from 'react';
 
 import GlobalAlert from './widgets/box/alert/globalAlert'
 import GlobalModal from './widgets/box/modal/globalModal'
-import globalPopUp from './widgets/box/popup/globalPopUp'
+import GlobalPopUp from './widgets/box/popup/globalPopUp'
 import GlobalCustom from './widgets/rootsiblings/globalCustom'
 
 import LoadingComponent from './widgets/box/loading/loading'
@@ -143,10 +144,17 @@ export const ModalBuilder = (modal) => {
 
   let resultParams = {}
 
+  let warpParams = {}
+
   let isCustomWrap = false
 
   const injectParams = function(params) {
     resultParams = Object.assign(resultParams, params);
+    return this
+  }
+
+  const injectWrapParams = function(params) {
+    warpParams = Object.assign(warpParams, params);
     return this
   }
 
@@ -156,32 +164,70 @@ export const ModalBuilder = (modal) => {
   }
 
   const show = function() {
-    showGlobalModal(modal, resultParams, isCustomWrap)
-  }
-
-  const test = function() {
-    console.warn(JSON.stringify(resultParams))
+    showGlobalModal(modal, resultParams, warpParams, isCustomWrap)
   }
 
   return {
     injectParams,
+    injectWrapParams,
     declareCustomWrap,
-    show,
-    test
+    show
   }
 }
 
-const showGlobalModal = (Modal, params, isCustomWrap = false) => {
+const showGlobalModal = (Modal, params, warpParams, isCustomWrap = false) => {
   GlobalModal.hideModal()
   if (isCustomWrap) {
-    GlobalModal.showWarpedModal(Modal, params)
+    GlobalModal.showWarpedModal(Modal, params, warpParams)
   } else {
     GlobalModal.showModal(Modal, params)
   }
 }
 
-const showGlobalPopUp = (PopUp, params, wrapParams) => {
-  globalPopUp.hidePopup()
-  globalPopUp.showPopup(PopUp, params, wrapParams)
+export const PopUpBuilder = (modal) => {
+
+  let resultParams = {}
+
+  let warpParams = {}
+
+  let isCustomWrap = false
+
+  const injectParams = function(params) {
+    resultParams = Object.assign(resultParams, params);
+    return this
+  }
+
+  const injectWrapParams = function(params) {
+    warpParams = Object.assign(warpParams, params);
+    return this
+  }
+
+  const declareCustomWrap = function() {
+    isCustomWrap = true
+    return this
+  }
+
+  const show = function() {
+    showGlobalPopUp(modal, resultParams,warpParams,isCustomWrap)
+  }
+  return {
+    injectParams,
+    injectWrapParams,
+    declareCustomWrap,
+    show
+  }
+}
+
+export const CollectionPopUp = () => {
+  return PopUpBuilder('CollectionPopUp')
+}
+
+const showGlobalPopUp = (PopUp, params, warpParams, isCustomWrap = false) => {
+  GlobalPopUp.hidePopup()
+  if (isCustomWrap) {
+    GlobalPopUp.showWarpedPopup(PopUp, params)
+  } else {
+    GlobalPopUp.showPopup(PopUp, params, warpParams)
+  }
 }
 
