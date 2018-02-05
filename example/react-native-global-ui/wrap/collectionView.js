@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
 import {
   View, StyleSheet, Dimensions, PixelRatio ,StatusBar
 } from 'react-native'
-const ViewPropTypes = require('ViewPropTypes');
 
 const window = Dimensions.get('window')
 const deviceWidthDp = window.width
@@ -30,7 +29,7 @@ class CollectionView extends Component {
     dataSource: PropTypes.array,
     staticConfig: PropTypes.object,
 
-    cellContainerStyle: View.propTypes.style
+    cellContainerStyle: PropTypes.style
   }
 
   static defaultProps = {
@@ -51,12 +50,13 @@ class CollectionView extends Component {
     let needWidth = width / numberLine
 
     let innerViewSource = dataSource ? dataSource.map((elem, index) => {
-      return (
+      let rnNode = renderItem(elem, index)
+      return rnNode ? (
         <View style={[{ width: needWidth, height: needWidth},
           collectionStyles.cellContainerStyle,cellContainerStyle]} key={index}>
-          {renderItem(elem, index)}
+          {rnNode}
         </View>
-      )
+      ): null
     }): null
     return (
       <View style={[collectionStyles.collectionContainer, this.props.style]}>
@@ -71,7 +71,7 @@ export default CollectionView
 const collectionStyles = StyleSheet.create({
   collectionContainer: {
     alignSelf: 'stretch',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
     overflow: 'visible',
     flexWrap: 'wrap',

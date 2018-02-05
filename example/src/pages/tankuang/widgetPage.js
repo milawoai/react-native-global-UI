@@ -2,27 +2,19 @@
  * Created by ygj on 2017/10/30.
  */
 import React, { Component } from 'react'
-import { StyleSheet, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native'
+import { StyleSheet, Image, View, Platform, TouchableOpacity, Text, ScrollView} from 'react-native'
 import { px2dp , px2sp} from '../../utils/screenUtils'
-// import {
-//   Alert,
-//   Loading,
-//   HUD,
-//   ModalBuilder,
-//   commonStyle,
-//   commonConfig
-// } from 'react-native-global-ui'
 
+import AlertModal from '../../../react-native-global-ui/widgets/box/modal/impl/alertModal'
 import {
   Alert,
   Loading,
   HUD,
   ModalBuilder,
-  PopUpBuilder,
-  CollectionPopUp,
   commonStyle,
   commonConfig
-} from '../../../react-native-global-ui/index'
+} from 'react-native-global-ui'
+
 
 class CellItem extends Component {
 
@@ -88,6 +80,55 @@ export default class WidgetPage extends Component {
               }
             ).show()
           }
+        },
+        {
+          text: '新式弹框',
+          onPress: () => {
+            let agreementContentText = {
+              color: '#666',
+              marginTop: px2dp(10),
+              marginLeft: px2dp(10),
+              marginRight: px2dp(10),
+              fontSize: px2sp(24),
+              ...Platform.select({
+                ios: {
+                  lineHeight: px2sp(28),
+                }
+              })
+            }
+            let secondTitleStyle =  {
+              fontWeight: '500',
+              fontSize: px2sp(26),
+              marginTop: px2dp(30),
+              marginBottom: px2dp(20),
+              marginLeft: px2dp(10),
+              marginRight: px2dp(10),
+            }
+            ModalBuilder(AlertModal).injectParams(
+              {
+                title: '水滴筹个人求助信息发布条款',
+                textStyle: 'agreementContentText',
+                contents: [
+                  {
+                    style: secondTitleStyle,
+                    text: '“水滴筹”是北京纵情向前科技有限公司（以下简称“运营方”）运营的为无力承担医疗费用的重大疾病患者提供求助信息发布的平台。',
+                  },
+                  {
+                    style: agreementContentText,
+                    text: '禁止通过水滴筹为慈善组织或任何慈善募捐项目发布募捐信息。',
+                  },
+                  {
+                    style: agreementContentText,
+                    text: '发起人提交相关申请材料不代表已获得资助筹款资格。',
+                  },
+                  {
+                    style: agreementContentText,
+                    text: '因国家宏观政策以及法律法规、相关监管规定的调整，水滴筹有权随时对发布信息进行调整、下线且不承担任何相关责任。',
+                  }
+                ]
+              }
+            ).show()
+          }
         }
       ]
     }
@@ -102,7 +143,7 @@ export default class WidgetPage extends Component {
               {
                 bgClose: true,
                 dataSource: ['a', 'b', 'c', 'd'],
-                lineNum: 3,
+                lineNum: 4,
                 renderItem: (elem, index) => {
                   return (<Text>{elem}</Text>)
                 }

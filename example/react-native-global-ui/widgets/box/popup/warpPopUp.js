@@ -30,7 +30,6 @@ class XPopUp extends Component {
   static defaultProps = {
     animationType: 'none',
     opacity: 0.6,
-    popUpHeight: px2dp(410),
     isApi: true
   };
 

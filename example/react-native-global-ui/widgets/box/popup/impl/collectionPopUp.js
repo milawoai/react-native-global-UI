@@ -22,7 +22,7 @@ class CollectionPopUp extends Component {
     dataSource: PropTypes.array,
     staticConfig: PropTypes.object,
 
-    cellContainerStyle: View.propTypes.style
+    cellContainerStyle: PropTypes.style
   }
 
   constructor (props) {
