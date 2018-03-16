@@ -50,3 +50,7 @@ Mask view is a wrap view behide our global View. It have three type: 'none', 'bl
 | block   | there has an Opacity mask behind global view， but the navigation bar can be clicked    |
 | full   |  Full screen are covered by mask, you can do nothing before call hide   |
 
+
+*none* :
+
+
