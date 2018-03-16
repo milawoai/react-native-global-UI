@@ -46,40 +46,31 @@ const defaultStyles = {
 class Loading extends Component {
 
   static propTypes = {
-    // 是否展示
-    showIndicator: PropTypes.bool,
-    //使用遮罩
-    maskType: PropTypes.oneOf([
-      'none',
-      'block',//不阻挡nav
-      'full',
-    ]),
-    //距离顶部高度
-    blockHeight: PropTypes.number,
     // 提示文案
     loadingText: PropTypes.string,
     // 提示文案Style
     loadingTextStyle: Text.propTypes.style,
+
     // 提示指示器Style
-    loadingStyle: ViewPropTypes.style,
+    indicatorStyle: ViewPropTypes.style,
     // 提示指示器Style
-    loadingSize: PropTypes.oneOfType([
+    indicatorSize: PropTypes.oneOfType([
       PropTypes.oneOf([ 'small', 'large' ]),
       PropTypes.number,
     ]),
     // 提示指示器color
-    loadingColor: ColorPropType,
-    // 提示指示器组件
-    loadingElem: PropTypes.element,
+    indicatorColor: ColorPropType,
+
     // 提示背景Style
     contentStyle: ViewPropTypes.style,
+    // 提示指示器组件
+    customLoadingElem: PropTypes.element,
   };
 
   static defaultProps = {
     loadingText:'加载中...',
-    showIndicator: true,
-    loadingSize: 'large',
-    loadingColor: 'white',
+    indicatorSize: 'large',
+    indicatorColor: 'white',
   }
 
   constructor(props) {
@@ -89,17 +80,22 @@ class Loading extends Component {
   render() {
     const {
       loadingText = '加载中...',
-      loadingStyle,
+      indicatorStyle,
       loadingTextStyle,
       contentStyle,
-      loadingElem,
-      loadingColor,
-      loadingSize,
+      indicatorColor,
+      indicatorSize,
+      customLoadingElem
     } = this.props
+
+    if (customLoadingElem) {
+      return customLoadingElem
+    }
 
     return (
       <View style={[defaultStyles.contentStyle, contentStyle]}>
-        <ActivityIndicator style={[defaultStyles.loadingStyle, loadingStyle]} size={loadingSize} color={loadingColor}/>
+        <ActivityIndicator style={[defaultStyles.loadingStyle, indicatorStyle]}
+                           size={indicatorSize} color={indicatorColor}/>
         <Text style={[defaultStyles.loadingTextStyle, loadingTextStyle]}>{loadingText}</Text>
       </View>
     );

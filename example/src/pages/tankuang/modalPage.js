@@ -2,16 +2,50 @@
  * Created by ygj on 2017/10/30.
  */
 import React, { Component } from 'react'
-import { StyleSheet, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native'
+import {
+  StyleSheet, Image, View, TouchableOpacity, Text, ScrollView, Animated, Easing
+} from 'react-native'
 import { px2dp , px2sp} from '../../utils/screenUtils'
 import {
   Alert,
   Loading,
+  LoadingBuilder,
   HUD,
   ModalBuilder,
   commonStyle,
   commonConfig
 } from 'react-native-global-ui'
+
+
+class RotateLoading extends React.Component {
+  state = {
+    rotateAnim: new Animated.Value(0),  // Initial value for opacity: 0
+  }
+
+  componentDidMount() {
+    this.startAnimation()
+  }
+
+  startAnimation = () => {
+    this.state.rotateAnim.setValue(0);
+    Animated.timing(this.state.rotateAnim, {
+      toValue: 360,
+      duration: 3000,
+      easing: Easing.linear
+    }).start(this.startAnimation);// 开始spring动画
+  }
+
+  render() {
+    let { rotateAnim } = this.state;
+    return (
+      <Animated.Image style={{width: 40, height: 40, borderRadius: 20,
+      transform:[{rotate: rotateAnim
+        .interpolate({inputRange: [0, 360],outputRange: ['0deg', '360deg']})
+      }]
+      }} source={require('../../image/loading.png')}/>
+    );
+  }
+}
 
 
 class CellItem extends Component {
@@ -65,7 +99,59 @@ export default class ModalPage extends Component {
         },
         {
           text: '隐藏Loading',
-          onPress:Loading.hide
+          onPress: Loading.hide
+        }
+      ]
+    }
+    const LoadingBuilderInfo = {
+      title: 'LoadingBuilder',
+      buttonInfos: [
+        {
+          text: 'user builder setLoadingText',
+          onPress: () => {
+            LoadingBuilder().setLoadingText('LoadingText').show()
+          }
+        },
+        {
+          text: 'user builder setLoadingTextStyle',
+          onPress: () => {
+            LoadingBuilder().setLoadingText('LoadingText').setLoadingTextStyle(
+              {'color': 'red', fontSize: 20}
+            ).show()
+          }
+        },
+        {
+          text: 'user builder setLMaskType',
+          onPress: () => {
+            LoadingBuilder().setMaskType('none').setLoadingTextStyle(
+              {'color': 'red', fontSize: 20}
+            ).show()
+          }
+        },
+        {
+          text: 'user builder injectIndicateParams',
+          onPress: () => {
+            LoadingBuilder().injectIndicateParams(
+              {
+                indicatorStyle: {
+                  position: 'relative',
+                  left: 20,
+                },
+                // 提示指示器Style
+                indicatorSize: 'small',
+                // 提示指示器color
+                indicatorColor: '#00ff00',
+              }
+            ).show()
+          }
+        },
+        {
+          text: 'user builder customLoading',
+          onPress: () => {
+            LoadingBuilder().setMaskType('none').setCustomLoading(
+              <RotateLoading />
+            ).show()
+          }
         }
       ]
     }
@@ -176,7 +262,7 @@ export default class ModalPage extends Component {
                     Alert.hide()
                   },
                   textStyle: {
-                    color: getColors().mainColor,
+                    color: commonConfig.getColors().mainColor,
                     fontWeight: '500'
                   }
                 }
@@ -242,6 +328,7 @@ export default class ModalPage extends Component {
 
     this.modalApis = [
       LoadingInfo,
+      LoadingBuilderInfo,
       LoadingHUD,
       Modals,
       Alerts

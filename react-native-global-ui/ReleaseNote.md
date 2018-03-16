@@ -1,3 +1,6 @@
+### 1.0.8-alpha1
+####修改崩溃bug，添加LoadingBuilder
+
 ### 1.0.7
 
 ####调整collectionView,现在renderItem为空时不会绘制
