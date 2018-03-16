@@ -99,10 +99,11 @@ Loading.show({
 })
 ```
 In this way, The function accepts an Object as an argument, and Object stores the required props for loading.
-
+```
 Loading.show({maskType: 'block',loadingText: 'nav可点哦'})
-Loading.show({loadingText: 'loading Text'})
 
+Loading.show({loadingText: 'loading Text'})
+```
 2. LoadingBuilder
 
 ```
@@ -114,11 +115,11 @@ LoadingBuilder().injectParams({prpos}).show()
 ```
 
 In this way, User can Call by chain and use some more understandable functions.
-
+```
 LoadingBuilder().setMaskType('none').setLoadingTextStyle({'color': 'red', fontSize: 20}).show()
 
 LoadingBuilder().setLoadingText('loading Text').show()
-
+```
 ##### chains func
 
 | func | params | Description |
