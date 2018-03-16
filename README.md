@@ -37,5 +37,16 @@ Loading.show()
 Loading.hide()
 ```
 
-# Usage
+# Componet
 ================================================
+
+### mask view (private)
+
+Mask view is a wrap view behide our global View. It have three type: 'none', 'block', 'full'.
+
+| type      | effect  |
+| :-------- | :--: |
+| none   |  5   |
+| block   |  5   |
+| full   |  5   |
+
