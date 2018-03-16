@@ -7,12 +7,21 @@
 # Usage
 ================================================
 
+## Install
+
+For IOS and Android:
+
+```
+    npm install react-native-global-ui --save
+```
+
+## Code
+
 ### 1）import UI
 
 ```
 import {
-  Loading,
-  HUD
+  Loading
 } from 'react-native-global-ui'
 ```
 
@@ -27,3 +36,6 @@ Loading.show()
 ```
 Loading.hide()
 ```
+
+# Usage
+================================================
