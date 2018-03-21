@@ -79,7 +79,11 @@ class HUD extends Component {
     //消失时间
     disappearTime: PropTypes.number,
 
-    hide: PropTypes.func
+    // 提示HUD组件
+    customHUDElem: PropTypes.element,
+
+    hide: PropTypes.func,
+    onHide: PropTypes.func
   };
 
   static defaultProps = {
@@ -108,9 +112,8 @@ class HUD extends Component {
       hudText,
       hudTextStyle,
       contentStyle,
-      maskType,
-      blockHeight,
-      hintType
+      hintType,
+      customHUDElem
     } = this.props
 
     if (!hudText) {
@@ -121,10 +124,11 @@ class HUD extends Component {
         case 'fail':
           hudText = '加载失败'
           break
-        case 'custom':
-          console.warn(`hintType 为 custom 时，请设置提示文字hudText`)
-          break
       }
+    }
+
+    if (customHUDElem) {
+      return customHUDElem
     }
 
     return (
@@ -185,6 +189,7 @@ class HUD extends Component {
       showIndicator: false
     });
     this.props.hide && this.props.hide()
+    this.props.onHide && this.props.onHide()
     self.stopTimer();
   }
 

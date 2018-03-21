@@ -16,7 +16,6 @@ import {px2dp} from '../../../utils/screenUtils'
 
 import {MaskWarp} from '../MaskNest'
 
-
 const defaultStyles = {
   contentStyle: {
     backgroundColor:'black',
@@ -41,7 +40,6 @@ const defaultStyles = {
     opacity: 1.0
   }
 }
-
 
 class Loading extends Component {
 
@@ -101,6 +99,5 @@ class Loading extends Component {
     );
   }
 }
-
 
 export default MaskWarp(Loading)

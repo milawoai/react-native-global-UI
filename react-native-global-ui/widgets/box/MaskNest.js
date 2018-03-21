@@ -58,7 +58,6 @@ export const MaskWarp = (SubView, maskConfig) => {
     };
 
     static defaultProps = {
-      loadingText: '加载中...',
       showIndicator: true,
       maskType: 'full',
       blockHeight: APPBAR_HEIGHT + STATUSBAR_HEIGHT,

@@ -7,9 +7,15 @@ import React, {Component} from 'react';
 import LoadingComponent from '../widgets/box/loading/loading'
 import GlobalCustom from '../widgets/rootsiblings/globalCustom'
 
+
+let defaultOptions = {}
+export const setLoadingDefaultOptions = (options) => {
+  defaultOptions = {...defaultOptions, ...options}
+}
+
 const showLoading = (custom, params) => {
   GlobalCustom.hideCustom()
-  GlobalCustom.showCustom(custom, params)
+  GlobalCustom.showCustom(custom, {...defaultOptions, ...params})
 }
 
 export const Loading = {

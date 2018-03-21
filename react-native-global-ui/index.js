@@ -17,8 +17,17 @@ module.exports = {
   get LoadingBuilder() {
     return require('./output/loading').LoadingBuilder
   },
+  get setLoadingDefaultOptions() {
+    return require('./output/loading').setLoadingDefaultOptions
+  },
   get HUD() {
     return require('./output/HUD').HUD
+  },
+  get HUDBuilder() {
+    return require('./output/HUD').HUDBuilder
+  },
+  get setHUDDefaultOptions() {
+    return require('./output/HUD').setHUDDefaultOptions
   },
   get ModalBuilder() {
     return require('./output/modal').ModalBuilder

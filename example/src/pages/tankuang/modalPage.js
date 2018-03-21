@@ -47,7 +47,6 @@ class RotateLoading extends React.Component {
   }
 }
 
-
 class CellItem extends Component {
   render() {
     const {title, buttonInfos} = this.props
