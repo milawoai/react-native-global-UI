@@ -60,7 +60,7 @@ class HUD extends Component {
   static propTypes = {
     // 是否展示
     showIndicator: PropTypes.bool,
-    hintType:  PropTypes.oneOf([
+    hintType: PropTypes.oneOf([
       'success',
       'fail',
       'custom'
