@@ -37,6 +37,9 @@ module.exports = {
   },
   get commonStyle() {
     return {...CommonStyle}
+  },
+  get GlobalShower() {
+    return require('./output/custom').GlobalShower
   }
 }
 

@@ -43,7 +43,8 @@ Loading.hide()
 ### mask view (private， common)
 
 Mask view is a wrap view behide our global View. 
-####type
+
+#### Type
 
 It have three type: 'none', 'block', 'full'.
 

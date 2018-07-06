@@ -7,44 +7,22 @@ import {
 } from 'react-native'
 import { px2dp , px2sp} from '../../utils/screenUtils'
 import {
-  Alert,
-  Loading,
-  LoadingBuilder,
-  HUD,
-  ModalBuilder,
   commonStyle,
-  commonConfig
+  GlobalShower
 } from 'react-native-global-ui'
 
 
-class RotateLoading extends React.Component {
-  state = {
-    rotateAnim: new Animated.Value(0),  // Initial value for opacity: 0
-  }
 
-  componentDidMount() {
-    this.startAnimation()
-  }
-
-  startAnimation = () => {
-    this.state.rotateAnim.setValue(0);
-    Animated.timing(this.state.rotateAnim, {
-      toValue: 360,
-      duration: 3000,
-      easing: Easing.linear
-    }).start(this.startAnimation);// 开始spring动画
-  }
-
+class Windows extends React.Component {
   render() {
-    let { rotateAnim } = this.state;
     return (
-      <Animated.Image style={{width: 40, height: 40, borderRadius: 20,
-      transform:[{rotate: rotateAnim
-        .interpolate({inputRange: [0, 360],outputRange: ['0deg', '360deg']})
-      }]
-      }} source={require('../../image/loading.png')}/>
+      <View style={{width: 40, height: 40, borderRadius: 100, backgroundColor: 'red', position: 'absolute', right: 20, top: 390}}/>
     );
   }
+}
+
+const windows = () => {
+
 }
 
 class CellItem extends Component {
@@ -79,258 +57,20 @@ export default class ModalPage extends Component {
   constructor(props) {
     super(props);
 
-    const LoadingInfo = {
-      title: 'Loading',
+    const WidgetInfo = {
+      title: 'Widget',
       buttonInfos: [
         {
-          text: '覆盖屏幕的loading',
-          onPress: Loading.show
-        },
-        {
-          text: '露出Nav的loading',
-          onPress: Loading.show,
-          params: {maskType: 'block',loadingText: 'nav可点哦'}
-        },
-        {
-          text: '没有Mask的loading',
-          onPress: Loading.show,
-          params: {maskType: 'none',loadingText: '旁边的loading可点哦'}
-        },
-        {
-          text: '隐藏Loading',
-          onPress: Loading.hide
-        }
-      ]
-    }
-    const LoadingBuilderInfo = {
-      title: 'LoadingBuilder',
-      buttonInfos: [
-        {
-          text: 'user builder setLoadingText',
+          text: 'Widget',
           onPress: () => {
-            LoadingBuilder().setLoadingText('LoadingText').show()
+            GlobalShower.show(Windows)
           }
-        },
-        {
-          text: 'user builder setLoadingTextStyle',
-          onPress: () => {
-            LoadingBuilder().setLoadingText('LoadingText').setLoadingTextStyle(
-              {'color': 'red', fontSize: 20}
-            ).show()
-          }
-        },
-        {
-          text: 'user builder setLMaskType',
-          onPress: () => {
-            LoadingBuilder().setMaskType('none').setLoadingTextStyle(
-              {'color': 'red', fontSize: 20}
-            ).show()
-          }
-        },
-        {
-          text: 'user builder injectIndicateParams',
-          onPress: () => {
-            LoadingBuilder().injectIndicateParams(
-              {
-                indicatorStyle: {
-                  position: 'relative',
-                  left: 20,
-                },
-                // 提示指示器Style
-                indicatorSize: 'small',
-                // 提示指示器color
-                indicatorColor: '#00ff00',
-              }
-            ).show()
-          }
-        },
-        {
-          text: 'user builder customLoading',
-          onPress: () => {
-            LoadingBuilder().setMaskType('none').setCustomLoading(
-              <RotateLoading />
-            ).show()
-          }
-        }
-      ]
-    }
-
-    const LoadingHUD = {
-      title: 'HUD',
-      buttonInfos: [
-        {
-          text: 'success',
-          onPress: HUD.show,
-          params: {
-            hintType: 'success',
-            maskType: 'none'
-          }
-        },
-        {// GlobalUI.showLoading({maskType: 'block'})
-          text: 'fail',
-          onPress: HUD.showFail
-        },
-        {// GlobalUI.showLoading({maskType: 'none', disappearTime: 5000})
-          text: '设定时间',
-          onPress: HUD.showSuccess,
-          params: {disappearTime: 5000}
-        },
-        {// GlobalUI.hideLoading()
-          text: '隐藏Loading',
-          onPress: HUD.hide
-        }
-      ]
-    }
-
-    const Modals = {
-      title: 'Modal',
-      buttonInfos: [
-        {
-          text: '图片弹框',
-          onPress: () => {
-            ModalBuilder('ImageModal').injectParams(
-              {
-                'handleModalSureClick': () => {
-                  Alert.alert('handleBtnClick')
-                },
-                'adImageUrl': ''
-              }
-            ).show()
-          }
-        },
-        {
-          text: '说明弹框',
-          onPress: () => {
-            ModalBuilder('HintModal').injectParams(
-              {
-                'handleButtonClick': () => {
-                  Alert.alert('handleButtonClick')
-                },
-                containerStyle: {
-                  borderRadius: px2dp(20)
-                },
-                title: '阿姨洗铁路'
-              }
-            ).show()
-          }
-        }
-      ]
-    }
-
-    const Alerts = {
-      title: 'Alert',
-      buttonInfos: [
-        {
-          text: '普通提示弹框',
-          onPress: () => {
-            Alert.alert(
-              '退款确认',
-              '退款将在5-7个工作日内退到您的捐款账户，是否确定退款？',
-              [
-                {
-                  text: '取消'
-                },
-                {
-                  text: '确认退款',
-                  onPress: () => {
-                    Alert.hide()
-                  },
-                  textStyle: {
-                    color: commonConfig.getColors().mainColor,
-                    fontWeight: '500'
-                  }
-                }
-              ]
-            )
-          }
-        },
-        {
-          text: '普通提示弹框',
-          onPress: () => {
-            Alert.alert(
-              '退款确认',
-              '退款将在5-7个工作日内退到您的捐款账户，是否确定退款？',
-              [
-                {
-                  text: '取消'
-                },
-                {
-                  text: '确认退款',
-                  onPress: () => {
-                    console.warn('hello')
-                    Alert.hide()
-                  },
-                  textStyle: {
-                    color: commonConfig.getColors().mainColor,
-                    fontWeight: '500'
-                  }
-                }
-              ]
-            )
-          }
-        },
-        {
-          text: '单选项提示弹框',
-          onPress: () => {
-            Alert.alert(
-              '退款确认',
-              '退款将在5-7个工作日内退到您的捐款账户，是否确定退款？'
-            )
-          }
-        },
-        {
-          text: '改变提示弹框样式',
-          onPress: () => {
-            Alert.alert(
-              '退款确认',
-              '退款将在5-7个工作日内退到您的捐款账户，是否确定退款？',
-              [
-                {
-                  text: '取消'
-                },
-                {
-                  text: '确认退款',
-                  onPress: () => {
-                    console.warn('hello')
-                  }
-                }
-              ],
-              {
-                container: {
-                  borderRadius: px2dp(0)
-                },
-                titleText: {
-                  color: 'red'
-                }
-              }
-            )
-          }
-        },
-        {
-          text: '改变Mask',
-          onPress: () => {
-            Alert.alert(
-              '退款确认',
-              '退款将在5-7个工作日内退到您的捐款账户，是否确定退款？',
-              [],
-              {},
-              {
-                maskStyle: {backgroundColor: 'white', opacity: 0.8},
-                maskType: 'block'
-              }
-            )
-          },
-
         }
       ]
     }
 
     this.modalApis = [
-      LoadingInfo,
-      LoadingBuilderInfo,
-      LoadingHUD,
-      Modals,
-      Alerts
+      WidgetInfo
     ]
   }
 
