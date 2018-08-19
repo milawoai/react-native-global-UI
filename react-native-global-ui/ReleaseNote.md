@@ -1,3 +1,10 @@
+### 1.0.9
+####为modal添加android返回键响应
+####loading时禁止android返回键响应
+
+### 1.0.8-alpha3
+####添加GlobalShower，可以弹自定义组件
+
 ### 1.0.8-alpha2
 ####添加HUDBuilder，添加defaultOptions，可以在App初始化时配置参数，从而避免每次设置
 

@@ -1,55 +1,31 @@
 {
-  "_from": "react-native-global-ui@1.0.2",
-  "_id": "react-native-global-ui@1.0.2",
-  "_inBundle": false,
-  "_integrity": "sha512-gEtZhL22t0PRZTccM1pH/DtDP03zl1gY2PQAMm5x1dhf8jaCe+Dduz04CQNncUM3zVzd6+XQ7vtuWx0RtsWU7Q==",
-  "_location": "/react-native-global-ui",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "version",
-    "registry": true,
-    "raw": "react-native-global-ui@1.0.2",
-    "name": "react-native-global-ui",
-    "escapedName": "react-native-global-ui",
-    "rawSpec": "1.0.2",
-    "saveSpec": null,
-    "fetchSpec": "1.0.2"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/react-native-global-ui/-/react-native-global-ui-1.0.2.tgz",
-  "_shasum": "4d5c205042f4797d9602c0f1d67e6ef57dbfe974",
-  "_spec": "react-native-global-ui@1.0.2",
-  "_where": "/Users/ygj/Desktop/IOS/UI库/rnUIlib/example",
-  "author": {
-    "name": "bing-zhi-lian-qu@163.com"
-  },
-  "bugs": {
-    "url": "https://github.com/milawoai/react-native-global-UI/issues"
-  },
-  "bundleDependencies": false,
-  "deprecated": false,
-  "description": "react native global UI ,contain alert, loading, HUD, Modal and so on",
-  "homepage": "https://github.com/milawoai/react-native-global-UI#readme",
-  "keywords": [
-    "react",
-    "react-native",
-    "react",
-    "native",
-    "global",
-    "loading"
-  ],
-  "license": "ISC",
-  "main": "index.js",
-  "name": "react-native-global-ui",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/milawoai/react-native-global-UI.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "version": "1.0.8-alpha2"
+	"author": {
+		"name": "bing-zhi-lian-qu@163.com"
+	},
+	"bugs": {
+		"url": "https://github.com/milawoai/react-native-global-UI/issues"
+	},
+	"bundleDependencies": false,
+	"deprecated": false,
+	"description": "react native global UI ,contain alert, loading, HUD, Modal and so on",
+	"homepage": "https://github.com/milawoai/react-native-global-UI#readme",
+	"keywords": [
+		"react",
+		"react-native",
+		"react",
+		"native",
+		"global",
+		"loading"
+	],
+	"license": "ISC",
+	"main": "index.js",
+	"name": "react-native-global-ui",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/milawoai/react-native-global-UI.git"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"version": "1.0.9"
 }

@@ -21,10 +21,6 @@ class Windows extends React.Component {
   }
 }
 
-const windows = () => {
-
-}
-
 class CellItem extends Component {
   render() {
     const {title, buttonInfos} = this.props

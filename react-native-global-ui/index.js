@@ -40,7 +40,13 @@ module.exports = {
   },
   get GlobalShower() {
     return require('./output/custom').GlobalShower
-  }
+  },
+  get PopUpBuilder() {
+    return require('./output/popup').PopUpBuilder
+  },
+  get CollectionPopUp() {
+    return require('./output/popup').CollectionPopUp
+  },
 }
 
 

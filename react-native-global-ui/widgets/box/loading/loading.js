@@ -9,7 +9,8 @@ import {
   ActivityIndicator,
   Platform,
   ViewPropTypes,
-  ColorPropType
+  ColorPropType,
+  BackHandler
 } from 'react-native';
 
 import {px2dp} from '../../../utils/screenUtils'
@@ -75,6 +76,15 @@ class Loading extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.startAnimation()
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress)
+  }
+
   render() {
     const {
       loadingText = '加载中...',
@@ -97,6 +107,10 @@ class Loading extends Component {
         <Text style={[defaultStyles.loadingTextStyle, loadingTextStyle]}>{loadingText}</Text>
       </View>
     );
+  }
+
+  handleBackPress = () => {
+    return true
   }
 }
 

@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {View, StyleSheet, TouchableOpacity, Animated, Platform} from 'react-native'
+import {View, StyleSheet, TouchableOpacity, Animated, Platform, BackHandler} from 'react-native'
 import {px2dp} from "../../../utils/screenUtils"
 import links from '../../../res/links'
 import {MaskWarp} from '../MaskNest'
@@ -33,6 +33,11 @@ class WrapModal extends Component {
 
   componentDidMount() {
     this.startAnimation()
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress)
   }
 
   render () {
@@ -102,6 +107,11 @@ class WrapModal extends Component {
   closeImmidiate = () => {
     this.props.closeModal && this.props.closeModal()
     this.props.onElementClose && this.props.onElementClose()
+  }
+
+  handleBackPress = () => {
+    this.closeImmidiate()
+    return true
   }
 }
 
