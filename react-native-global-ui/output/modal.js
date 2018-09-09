@@ -45,8 +45,8 @@ export const ModalBuilder = (modal) => {
 const showGlobalModal = (Modal, params, warpParams, isCustomWrap = false) => {
   GlobalModal.hideModal()
   if (isCustomWrap) {
-    GlobalModal.showWarpedModal(Modal, params, warpParams)
+    GlobalModal.showWarpedModal(Modal, params)
   } else {
-    GlobalModal.showModal(Modal, params)
+    GlobalModal.showModal(Modal, params, warpParams)
   }
 }
