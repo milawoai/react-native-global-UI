@@ -77,7 +77,6 @@ class Loading extends Component {
   }
 
   componentDidMount() {
-    this.startAnimation()
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
   }
 
