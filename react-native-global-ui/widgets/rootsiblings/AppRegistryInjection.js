@@ -33,7 +33,7 @@ let isEstablished = false;
             return class extends Component {
                 static displayName = `Root(${appKey})`;
 
-                componentWillMount() {
+                componentDidMount() {
                     this._update = this._update.bind(this);
                     DeviceEventEmitter.addListener('siblings.update', this._update);
                 };

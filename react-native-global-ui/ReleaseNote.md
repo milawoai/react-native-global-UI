@@ -1,3 +1,9 @@
+### 2.0.1
+Collection View 添加lineHeight属性，配置行高
+
+### 2.0.0
+支持React 16， React native 0.64
+
 ### 1.0.9
 ####为modal添加android返回键响应
 ####loading时禁止android返回键响应

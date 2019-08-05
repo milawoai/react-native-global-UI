@@ -64,7 +64,7 @@ export const MaskWarp = (SubView, maskConfig) => {
       opacity: 0.3
     }
 
-    initState = (props) => {
+    static initState = (props) => {
       let resultState = {
         showIndicator: props.showIndicator
       }
@@ -79,20 +79,22 @@ export const MaskWarp = (SubView, maskConfig) => {
       return resultState
     }
 
-    state = this.initState(this.props)
+    state = MaskWarpView.initState(this.props)
 
     constructor(props) {
       super(props);
     }
 
-    componentWillMount() {
+    componentDidMount() {
       setTimeout(() => {
         this.setContentXY()
       }, 50)
     }
 
-    componentWillReceiveProps(nextProps) {
-      this.setState(this.initState(nextProps))
+    static getDerivedStateFromProps(nextProps, prevState) {
+
+      let state = MaskWarpView.initState(nextProps)
+      return state
     }
 
     render() {
@@ -127,7 +129,7 @@ export const MaskWarp = (SubView, maskConfig) => {
         contentStyle
       )
 
-      let injectProps = Object.assign(this.props, {contentStyle: finalContentStyle})
+      let injectProps = Object.assign({}, this.props, {contentStyle: finalContentStyle})
 
       let MaskedUI = null
 

@@ -5,9 +5,11 @@ import React, {Component} from 'react';
 import RootSiblings from '../../rootsiblings/SiblingsManager'
 import WarpPopUp from './warpPopUp'
 import CollectionPopUp from './impl/collectionPopUp'
+import SheetPopUp from './impl/sheetPopUp'
 
 const Modals = {
   'CollectionPopUp': CollectionPopUp,
+  'SheetPopUp': SheetPopUp
 }
 
 let rootSiblingInstancePop = ''
@@ -36,11 +38,11 @@ const showWarpedPopup = (PopUP, params) => {
 
 const showPopup = (PopUP, params, warpParams) => {
   hidePopup()
+
   if (typeof PopUP === 'string') {
     PopUP = Modals[PopUP];
   }
   if (!PopUP) return
-
   let fixWarpParams = Object.assign({},{closePopUp: hidePopup}, warpParams)
   let fixParams = Object.assign({}, {closePopUp: hidePopup},{style: {alignSelf: 'stretch', flex: 1}}, params)
   const renderContent = PopUP ?

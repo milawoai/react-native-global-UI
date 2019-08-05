@@ -97,7 +97,7 @@ class HUD extends Component {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.showIndicator) {
       this.startTimer();
     }

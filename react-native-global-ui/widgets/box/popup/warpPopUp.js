@@ -50,8 +50,7 @@ class XPopUp extends Component {
 
   render () {
     if (!this.state.visible) return null
-
-    let {bottomHeight} = this.state
+    let {bottomHeight = 0} = this.state
     return (
       <View style={[styles.shareOutContainer, {minHeight: bottomHeight}, this.props.style]}>
         {this.props.children}
@@ -75,14 +74,14 @@ class XPopUp extends Component {
         setTimeout(() => {
           LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
           this.setState({
-            bottomHeight: parseInt(this.props.popUpHeight),
+            bottomHeight: parseInt(this.props.popUpHeight) ? parseInt(this.props.popUpHeight) : 0,
             visible: true
           })
         }, 100)
         break
       default:
         this.setState({
-          bottomHeight: parseInt(this.props.popUpHeight),
+          bottomHeight: parseInt(this.props.popUpHeight)? parseInt(this.props.popUpHeight) : 0,
           visible: true
         })
         break

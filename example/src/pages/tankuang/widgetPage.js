@@ -11,9 +11,9 @@ import {
   HUD,
   ModalBuilder,
   commonStyle,
-  commonConfig
+  commonConfig,
+  CollectionPopUp
 } from 'react-native-global-ui'
-
 
 class CellItem extends Component {
 
@@ -140,7 +140,6 @@ export default class WidgetPage extends Component {
           onPress: () => {
             CollectionPopUp().injectParams(
               {
-                bgClose: true,
                 dataSource: ['a', 'b', 'c', 'd'],
                 lineNum: 4,
                 renderItem: (elem, index) => {

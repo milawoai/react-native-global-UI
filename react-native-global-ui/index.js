@@ -47,6 +47,9 @@ module.exports = {
   get CollectionPopUp() {
     return require('./output/popup').CollectionPopUp
   },
+  get SheetPopUp() {
+    return require('./output/popup').SheetPopUp
+  }
 }
 
 

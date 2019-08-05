@@ -171,13 +171,18 @@ export default class extends Component {
     this.isSetOffset = true
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (!nextProps.autoplay && this.autoplayTimer) clearTimeout(this.autoplayTimer)
-    this.isSetOffset = true
-    this.setState(this.initState(nextProps, this.props.index !== nextProps.index), () => {
-      this.isSetOffset = false
-    })
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //
+  //   if (!nextProps.autoplay && this.autoplayTimer) clearTimeout(this.autoplayTimer)
+  //   this.isSetOffset = true
+  //   this.setState(this.initState(nextProps, this.props.index !== nextProps.index), () => {
+  //     this.isSetOffset = false
+  //   })
+  // }
+  //
+  // componentWillReceiveProps (nextProps) {
+  //
+  // }
 
   componentDidMount () {
     this.autoplay()

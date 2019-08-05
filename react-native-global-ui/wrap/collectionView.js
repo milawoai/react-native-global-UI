@@ -43,16 +43,17 @@ class CollectionView extends Component {
   }
 
   render() {
-    const {dataSource, renderItem, lineNum, cellContainerStyle, staticConfig} = this.props
+    const {dataSource, renderItem, lineNum, lineHeight, cellContainerStyle, staticConfig} = this.props
 
     let width = staticConfig  && staticConfig.width ? staticConfig.width : deviceWidthDp
     let numberLine = Number(lineNum) ? Number(lineNum) : 1
     let needWidth = width / numberLine
+    let needHeight = lineHeight ? needWidth : needWidth
 
     let innerViewSource = dataSource ? dataSource.map((elem, index) => {
       let rnNode = renderItem(elem, index)
       return rnNode ? (
-        <View style={[{ width: needWidth, height: needWidth},
+        <View style={[{ width: needWidth, height: needHeight},
           collectionStyles.cellContainerStyle,cellContainerStyle]} key={index}>
           {rnNode}
         </View>

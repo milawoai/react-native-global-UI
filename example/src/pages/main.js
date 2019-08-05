@@ -14,9 +14,14 @@ import HUDPage from './tankuang/HUDPage'
 import LoadingPage from './tankuang/LoadingPage'
 import WidgetPage from './tankuang/widgetPage'
 
+// import {
+//   setLoadingDefaultOptions
+// } from 'react-native-global-ui'
+
 import {
   setLoadingDefaultOptions
 } from 'react-native-global-ui'
+
 
 setLoadingDefaultOptions({loadingText: 'default'})
 

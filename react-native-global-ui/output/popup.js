@@ -39,6 +39,10 @@ export const CollectionPopUp = () => {
   return PopUpBuilder('CollectionPopUp')
 }
 
+export const SheetPopUp = () => {
+  return PopUpBuilder('SheetPopUp')
+}
+
 const showGlobalPopUp = (PopUp, params, warpParams, isCustomWrap = false) => {
   GlobalPopUp.hidePopup()
   if (isCustomWrap) {
